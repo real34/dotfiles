@@ -1,0 +1,9 @@
+franklinkim.vim
+jdauphant.sublimetext
+igor_mukhin.sublimetext3_packagecontrol
+geerlingguy.git
+ansiblebit.oracle-java
+kosssi.phpstorm
+franklinkim.docker
+franklinkim.docker-compose
+glennr.oh-my-zsh

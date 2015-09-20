@@ -1,0 +1,47 @@
+---
+- name: Setup the machine as a root user
+  hosts: localhost
+  become: yes 
+  become_user: root
+  roles:
+    - { role: franklinkim.vim, tags: vim,
+        vim_config: [ 'set expandtab' ] }
+    - { role: jdauphant.sublimetext, tags: sublimetext }
+    - { role: igor_mukhin.sublimetext3_packagecontrol, tags: sublimetext,
+        packagecontrol_packages: [
+          "AutoFileName",
+          "Git",
+          "GitGutter",
+          "Terminal" ] }
+    - { role: geerlingguy.git, tags: git,
+        git_packages: [
+          "git-gui",
+          "gitk" ] }
+    - { role: kosssi.phpstorm, tags: phpstorm }
+    - { role: ansiblebit.oracle-java, tags: phpstorm,
+        oracle_java_set_as_default: yes }
+    - { role: franklinkim.docker, tags: docker }
+    - { role: franklinkim.docker-compose, tags: docker,
+        docker_compose_version: 1.4.1 }
+    - { role: glennr.oh-my-zsh, tags: shell,
+        user: pierre }
+
+- name: Setup user settings
+  hosts: localhost
+  become: no
+  tasks:
+    - name: ensure Git is properly configured
+      template: src=templates/gitconfig.j2 dest={{ansible_env.HOME}}/.gitconfig
+
+# TODO
+# Docker: extend to have nginx proxy:
+#   see https://github.com/weareinteractive/ansible-docker/blob/master/defaults/main.yml
+# https://github.com/clvv/fasd
+# Vault for passwords and sensitive data: http://docs.ansible.com/ansible/playbooks_vault.html
+#
+# Galaxy
+#   apt-repository: https://galaxy.ansible.com/list#/roles/3632
+#   php: https://galaxy.ansible.com/list#/roles/1232
+#
+# BIOS :
+#   switch ctrl / fn
