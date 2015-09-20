@@ -7,3 +7,5 @@ kosssi.phpstorm
 franklinkim.docker
 franklinkim.docker-compose
 glennr.oh-my-zsh
+devbox.chrome
+flyinggecko.i3

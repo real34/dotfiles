@@ -4,6 +4,11 @@
   become: yes 
   become_user: root
   roles:
+    - { role: flyinggecko.i3, tags: windowmanager,
+        i3_state: "present",
+        i3_user: [
+          { name: pierre, i3config: [ i3.base ], i3status: i3status.desktop }
+        ] }
     - { role: franklinkim.vim, tags: vim,
         vim_config: [ 'set expandtab' ] }
     - { role: jdauphant.sublimetext, tags: sublimetext }
@@ -25,6 +30,14 @@
         docker_compose_version: 1.4.1 }
     - { role: glennr.oh-my-zsh, tags: shell,
         user: pierre }
+    - { role: devbox.chrome, tags: browser }
+  tasks:
+    - name: Window manager related packages are installed
+      apt: name={{ item }} state=present
+      tags: windowmanager
+      with_items:
+       - gnome-settings-daemon
+       - suckless-tools
 
 - name: Setup user settings
   hosts: localhost
