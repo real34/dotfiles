@@ -27,12 +27,26 @@
     - { role: kosssi.phpstorm, tags: phpstorm }
     - { role: ansiblebit.oracle-java, tags: phpstorm,
         oracle_java_set_as_default: yes }
-    - { role: franklinkim.docker, tags: docker }
+    - { role: franklinkim.docker, tags: docker,
+        docker_containers: [
+          {
+            image: jwilder/nginx-proxy,
+            name: nginx-proxy,
+            ports: ["80:80"],
+            volumes: [
+              "/var/run/docker.sock:/tmp/docker.sock:ro",
+              "/home/pierre/dotfiles/my_nginx_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro"
+            ]
+          }
+        ]
+      }
     - { role: franklinkim.docker-compose, tags: docker,
         docker_compose_version: 1.4.1 }
     - { role: glennr.oh-my-zsh, tags: shell,
         user: pierre }
     - { role: devbox.chrome, tags: browser }
+    - { role: nickjj.dnsmasq, tags: dnsmasq,
+        dnsmasq_tld: test }
   tasks:
     - name: Window manager related packages are installed
       apt: name={{ item }} state=present
@@ -64,14 +78,22 @@
       template: src=templates/gitconfig.j2 dest={{ansible_env.HOME}}/.gitconfig
 
 # TODO
-# Docker: extend to have nginx proxy:
-#   see https://github.com/weareinteractive/ansible-docker/blob/master/defaults/main.yml
+# i3 bugfixes:
+#   http://blog.hugochinchilla.net/2013/03/using-gnome-3-with-i3-window-manager/ - usr/share/xsessions/gnome-i3.desktop
+#   ++ http://www.draconianoverlord.com/2014/05/26/from-xmonad-to-i3.html
+#   Virer iBus (cf http://doc.ubuntu-fr.org/ibus)
+#
+# https://github.com/sgentle/caniuse-cmd
+#
+# sudo usermod -aG docker pierre ?
 # https://github.com/clvv/fasd
+# Dropbox
 # Vault for passwords and sensitive data: http://docs.ansible.com/ansible/playbooks_vault.html
 #
+# SSh-agent
 # Galaxy
 #   apt-repository: https://galaxy.ansible.com/list#/roles/3632
 #   php: https://galaxy.ansible.com/list#/roles/1232
 #
-# BIOS :
-#   switch ctrl / fn
+# Refactoring:
+#   Nginx-proxy: move the config file by copying it where it belongs
