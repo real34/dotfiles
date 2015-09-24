@@ -61,6 +61,7 @@
       tags: tools
       with_items:
        - ack-grep
+       - curl
        - filezilla
        - gimp
        - htop
@@ -92,6 +93,7 @@
 #   Fix accents with iBus (cf http://doc.ubuntu-fr.org/ibus) -> setxkbmap -layout fr -variant oss
 #
 # https://github.com/sgentle/caniuse-cmd
+# httpie
 #
 # sudo usermod -aG docker pierre ?
 # Dropbox
