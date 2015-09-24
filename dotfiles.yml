@@ -73,20 +73,27 @@
 - name: Setup user settings
   hosts: localhost
   become: no
+  vars:
+    BIN_DIR: "{{ansible_env.HOME}}/bin"
   tasks:
+    - name: ensure a writable "bin" directory exists
+      file: path={{BIN_DIR}} state=directory mode=0755
     - name: ensure Git is properly configured
       template: src=templates/gitconfig.j2 dest={{ansible_env.HOME}}/.gitconfig
+    - name: ensure fasd is installed and configured
+      get_url: url=https://raw.githubusercontent.com/clvv/fasd/master/fasd dest={{BIN_DIR}}/fasd mode=0755
+    - name: ensure dotfiles are available
+      copy: src=.zshrc dest={{ansible_env.HOME}}/.zshrc
 
 # TODO
 # i3 bugfixes:
 #   http://blog.hugochinchilla.net/2013/03/using-gnome-3-with-i3-window-manager/ - usr/share/xsessions/gnome-i3.desktop
 #   ++ http://www.draconianoverlord.com/2014/05/26/from-xmonad-to-i3.html
-#   Virer iBus (cf http://doc.ubuntu-fr.org/ibus)
+#   Fix accents with iBus (cf http://doc.ubuntu-fr.org/ibus) -> setxkbmap -layout fr -variant oss
 #
 # https://github.com/sgentle/caniuse-cmd
 #
 # sudo usermod -aG docker pierre ?
-# https://github.com/clvv/fasd
 # Dropbox
 # Vault for passwords and sensitive data: http://docs.ansible.com/ansible/playbooks_vault.html
 #
