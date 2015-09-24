@@ -56,6 +56,7 @@
        - suckless-tools
        - pcmanfm
        - dunst
+       - numlockx
     - name: Other convenient tools are installed
       apt: name={{ item }} state=present
       tags: tools
@@ -90,19 +91,12 @@
 # i3 bugfixes:
 #   http://blog.hugochinchilla.net/2013/03/using-gnome-3-with-i3-window-manager/ - usr/share/xsessions/gnome-i3.desktop
 #   ++ http://www.draconianoverlord.com/2014/05/26/from-xmonad-to-i3.html
-#   Fix accents with iBus (cf http://doc.ubuntu-fr.org/ibus) -> setxkbmap -layout fr -variant oss
 #
 # https://github.com/sgentle/caniuse-cmd
-# httpie
 #
 # sudo usermod -aG docker pierre ?
 # Dropbox
 # Vault for passwords and sensitive data: http://docs.ansible.com/ansible/playbooks_vault.html
-#
-# SSh-agent
-# Galaxy
-#   apt-repository: https://galaxy.ansible.com/list#/roles/3632
-#   php: https://galaxy.ansible.com/list#/roles/1232
 #
 # Refactoring:
 #   Nginx-proxy: move the config file by copying it where it belongs
