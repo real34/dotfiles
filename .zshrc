@@ -30,3 +30,4 @@ export EDITOR='vim'
 # Convenient aliases
 alias http='docker run -it --rm --net=host clue/httpie'
 alias dc=docker-compose
+alias copy="xclip -selection c"

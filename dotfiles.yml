@@ -70,6 +70,7 @@
        - shutter
        - exfat-utils
        - exfat-fuse
+       - xclip
 
 - name: Setup user settings
   hosts: localhost
