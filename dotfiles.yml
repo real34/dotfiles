@@ -56,6 +56,7 @@
        - pcmanfm
        - dunst
        - numlockx
+       - xbacklight
     - name: Other convenient tools are installed
       apt: name={{ item }} state=present
       tags: tools
@@ -92,7 +93,6 @@
 # TODO
 # i3 bugfixes:
 #   ++ http://www.draconianoverlord.com/2014/05/26/from-xmonad-to-i3.html
-#   Fn keys (sound, brightness ...). Try https://wiki.archlinux.org/index.php/Fcitx ?
 #
 # https://github.com/sgentle/caniuse-cmd
 #

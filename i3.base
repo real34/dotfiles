@@ -145,9 +145,13 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# To get keycodes, run: sudo showkey -k
 bindsym XF86AudioRaiseVolume exec --no-startup-id handle-volume-change up
 bindsym XF86AudioLowerVolume exec --no-startup-id handle-volume-change down
 bindsym XF86AudioMute exec --no-startup-id handle-volume-change mute
+
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
