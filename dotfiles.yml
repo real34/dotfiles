@@ -79,10 +79,14 @@
   vars:
     BIN_DIR: "{{ansible_env.HOME}}/bin"
   tasks:
+    - name: ensure Git is properly configured
+      tags: git
+      template: src=templates/{{ item.src }} dest={{ansible_env.HOME}}/{{ item.dest }}
+      with_items:
+        - { src: gitconfig.j2, dest: .gitconfig }
+        - { src: gitignore.j2, dest: .gitignore }
     - name: ensure a writable "bin" directory exists
       file: path={{BIN_DIR}} state=directory mode=0755
-    - name: ensure Git is properly configured
-      template: src=templates/gitconfig.j2 dest={{ansible_env.HOME}}/.gitconfig
     - name: ensure fasd is installed and configured
       get_url: url=https://raw.githubusercontent.com/clvv/fasd/master/fasd dest={{BIN_DIR}}/fasd mode=0755
     - name: ensure binaries are available in path
