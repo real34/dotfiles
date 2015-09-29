@@ -72,6 +72,11 @@
        - exfat-utils
        - exfat-fuse
        - xclip
+    - name: Thinkpad related packages are installed
+      apt: name={{ item }} state=present
+      tags: thinkpad
+      with_items:
+       - alsa-tools-gui # See how to configure dock audio output at http://askubuntu.com/questions/670334/thinkpad-w540-docking-station-no-sound-on-external-speakers
 
 - name: Setup user settings
   hosts: localhost
