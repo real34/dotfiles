@@ -100,10 +100,12 @@
       copy: src=.zshrc dest={{ansible_env.HOME}}/.zshrc
 
 # TODO
-# i3 bugfixes:
+# i3 bugfixes/improvements:
 #   ++ http://www.draconianoverlord.com/2014/05/26/from-xmonad-to-i3.html
 #
 # https://github.com/sgentle/caniuse-cmd
+#
+# Capistrano : docker run --rm -it  -v `pwd`:/home -v $HOME/.ssh:/root/.ssh --workdir="/home" ruby:slim bash -c "bundle install && bundle exec cap deploy"
 #
 # sudo usermod -aG docker pierre ?
 # Dropbox
