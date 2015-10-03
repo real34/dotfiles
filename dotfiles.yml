@@ -38,6 +38,18 @@
               "/var/run/docker.sock:/tmp/docker.sock:ro",
               "/home/pierre/dotfiles/my_nginx_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro"
             ]
+          },
+          {
+            image: gfjardim/dropbox,
+            name: dropbox,
+            privileged: True,
+            net: host,
+            docker_user: pierre,
+            volumes: [
+              "/home/pierre/.dropbox:/home/.dropbox",
+              "/home/pierre/Dropbox:/home/Dropbox",
+              "/etc/localtime:/etc/localtime:ro"
+            ]
           }
         ]
       }
@@ -106,10 +118,12 @@
 #
 # https://github.com/sgentle/caniuse-cmd
 #
-# Capistrano : docker run --rm -it  -v `pwd`:/home -v $HOME/.ssh:/root/.ssh --workdir="/home" ruby:slim bash -c "bundle install && bundle exec cap deploy"
+# Capistrano : docker run --rm -it  -v `pwd`:/home -v $HOME/.ssh:/root/.ssh --workdir="/home" ruby bash -c "bundle install && bundle exec cap deploy"
+# Composer : docker run -v $(pwd):/app composer/composer install
+# Mysql
 #
 # sudo usermod -aG docker pierre ?
-# Dropbox
+# Dropbox : sudo usermod -aG users pierre
 # Vault for passwords and sensitive data: http://docs.ansible.com/ansible/playbooks_vault.html
 #
 # Refactoring:
