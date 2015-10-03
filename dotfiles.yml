@@ -84,6 +84,9 @@
        - shutter
        - exfat-utils
        - exfat-fuse
+       - ncdu
+       - tree
+       - unison
        - xclip
     - name: Thinkpad related packages are installed
       apt: name={{ item }} state=present
@@ -104,12 +107,16 @@
         - { src: gitconfig.j2, dest: .gitconfig }
         - { src: gitignore.j2, dest: .gitignore }
     - name: ensure a writable "bin" directory exists
+      tags: shell
       file: path={{BIN_DIR}} state=directory mode=0755
     - name: ensure fasd is installed and configured
+      tags: shell
       get_url: url=https://raw.githubusercontent.com/clvv/fasd/master/fasd dest={{BIN_DIR}}/fasd mode=0755
     - name: ensure binaries are available in path
+      tags: shell
       copy: src=bin/ dest={{BIN_DIR}}/ mode=0755
     - name: ensure dotfiles are available
+      tags: shell
       copy: src=.zshrc dest={{ansible_env.HOME}}/.zshrc
 
 # TODO
