@@ -31,3 +31,9 @@ export EDITOR='vim'
 alias http='docker run -it --rm --net=host clue/httpie'
 alias dc=docker-compose
 alias copy="xclip -selection c"
+alias composer='docker run -ti --rm -v $(pwd):/app composer/composer'
+alias npm='docker run -ti --rm -v `pwd`:/project -w /project node:4.1.1 npm'
+
+dcrefresh() {
+	dc stop $1 && dc rm -v $1 && dc up -d $1
+}
