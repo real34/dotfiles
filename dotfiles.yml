@@ -68,6 +68,7 @@
       tags: tools
       with_items:
        - ack-grep
+       - byzanz
        - curl
        - filezilla
        - gimp
