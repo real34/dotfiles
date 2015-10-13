@@ -28,12 +28,12 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 
 # Convenient aliases
-alias http='docker run -it --rm --net=host clue/httpie'
+alias http='docker run -it --rm --name http-${PWD##*/} --net=host clue/httpie'
 alias dc=docker-compose
 alias copy="xclip -selection c"
-alias composer='docker run -ti --rm -v $(pwd):/app composer/composer'
-alias npm='docker run -ti --rm -v `pwd`:/project -w /project node:4.1.1 npm'
+alias composer='docker run -ti --rm --name composer-${PWD##*/} -v $(pwd):/app composer/composer'
+alias npm='docker run -ti --rm --name npm-${PWD##*/} -v `pwd`:/project -w /project node:4.1.1 npm'
 
 dcrefresh() {
-	dc stop $1 && dc rm -v $1 && dc up -d $1
+	dc stop $1 && dc rm -v -f $1 && dc up -d $1
 }
