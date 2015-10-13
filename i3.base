@@ -100,6 +100,8 @@ bindsym $mod+Shift+k workspace next_on_output
 # move workspaces between outputs
 bindsym $mod+Control+Left move workspace to output left
 bindsym $mod+Control+Right move workspace to output right
+bindsym $mod+Control+Up move workspace to output up
+bindsym $mod+Control+Down move workspace to output down
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
