@@ -137,9 +137,16 @@
 # Composer : docker run -v $(pwd):/app composer/composer install
 # Mysql
 #
+# Corriger l'hibernation : http://doc.ubuntu-fr.org/veille_et_hibernation
+#
 # sudo usermod -aG docker pierre ?
 # Dropbox : sudo usermod -aG users pierre
 # Vault for passwords and sensitive data: http://docs.ansible.com/ansible/playbooks_vault.html
+#
+# Skype : https://hub.docker.com/r/sameersbn/skype/
+#   docker run -it --rm --volume /usr/local/bin:/target quay.io/sameersbn/skype:latest install
+#
+# Aliases++ https://github.com/thbkrkr/dotfiles/blob/master/dotfiles/.zshrc#L45
 #
 # Refactoring:
 #   Nginx-proxy: move the config file by copying it where it belongs
