@@ -11,14 +11,6 @@
         ] }
     - { role: franklinkim.vim, tags: vim,
         vim_config: [ 'set expandtab' ] }
-    - { role: jdauphant.sublimetext, tags: sublimetext }
-    - { role: igor_mukhin.sublimetext3_packagecontrol, tags: sublimetext,
-        packagecontrol_packages: [
-          "AutoFileName",
-          "Git",
-          "GitGutter",
-          "Side​Bar​Enhancements",
-          "Terminal" ] }
     - { role: geerlingguy.git, tags: git,
         git_packages: [
           "git-gui",
@@ -99,6 +91,17 @@
   become: no
   vars:
     BIN_DIR: "{{ansible_env.HOME}}/bin"
+  roles:
+    - { role: jdauphant.sublimetext, tags: sublimetext }
+    - { role: igor_mukhin.sublimetext3_packagecontrol, tags: sublimetext,
+        packagecontrol_packages: [
+          "AutoFileName",
+          "Git",
+          "GitGutter",
+          "SideBarEnhancements",
+          "Terminal"
+        ]
+      }
   tasks:
     - name: ensure Git is properly configured
       tags: git
