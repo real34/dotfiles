@@ -4,24 +4,42 @@
   become: yes 
   become_user: root
   roles:
-    - { role: flyinggecko.i3, tags: windowmanager,
+    - {
+        role: flyinggecko.i3,
+        tags: windowmanager,
         i3_state: "present",
         i3_user: [
           { name: pierre, i3config: [ i3.base ], i3status: i3status.desktop }
-        ] }
-    - { role: franklinkim.vim, tags: vim,
-        vim_config: [ 'set expandtab' ] }
-    - { role: geerlingguy.git, tags: git,
+        ]
+      }
+    - {
+        role: franklinkim.vim,
+        tags: vim,
+        vim_config: [ 'set expandtab' ]
+      }
+    - {
+        role: geerlingguy.git,
+        tags: git,
         git_packages: [
           "git-gui",
           "gitk",
           "git-flow",
-          "tig" ] }
-    - { role: kosssi.phpstorm, tags: phpstorm,
-        phpstorm_version: 9.0.2 }
-    - { role: ansiblebit.oracle-java, tags: phpstorm,
-        oracle_java_set_as_default: yes }
-    - { role: franklinkim.docker, tags: docker,
+          "tig"
+        ]
+      }
+    - {
+        role: kosssi.phpstorm,
+        tags: phpstorm,
+        phpstorm_version: 9.0.2
+      }
+    - {
+        role: ansiblebit.oracle-java,
+        tags: phpstorm,
+        oracle_java_set_as_default: yes
+      }
+    - {
+        role: franklinkim.docker,
+        tags: docker,
         docker_containers: [
           {
             image: jwilder/nginx-proxy,
@@ -46,13 +64,22 @@
           }
         ]
       }
-    - { role: franklinkim.docker-compose, tags: docker,
-        docker_compose_version: 1.4.1 }
-    - { role: glennr.oh-my-zsh, tags: shell,
-        user: pierre }
+    - {
+        role: franklinkim.docker-compose,
+        tags: docker,
+        docker_compose_version: 1.4.1
+      }
+    - {
+        role: glennr.oh-my-zsh,
+        tags: shell,
+        user: pierre
+      }
     - { role: devbox.chrome, tags: browser }
-    - { role: nickjj.dnsmasq, tags: dnsmasq,
-        dnsmasq_tld: test }
+    - {
+        role: nickjj.dnsmasq,
+        tags: dnsmasq,
+        dnsmasq_tld: test
+      }
   tasks:
     - name: Window manager related packages are installed
       apt: name={{ item }} state=present
@@ -96,7 +123,9 @@
     BIN_DIR: "{{ansible_env.HOME}}/bin"
   roles:
     - { role: jdauphant.sublimetext, tags: sublimetext }
-    - { role: igor_mukhin.sublimetext3_packagecontrol, tags: sublimetext,
+    - {
+        role: igor_mukhin.sublimetext3_packagecontrol,
+        tags: sublimetext,
         packagecontrol_packages: [
           "AutoFileName",
           "Git",
