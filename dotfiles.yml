@@ -15,7 +15,8 @@
         git_packages: [
           "git-gui",
           "gitk",
-          "git-flow" ] }
+          "git-flow",
+          "tig" ] }
     - { role: kosssi.phpstorm, tags: phpstorm,
         phpstorm_version: 9.0.2 }
     - { role: ansiblebit.oracle-java, tags: phpstorm,
@@ -127,6 +128,8 @@
 #   ++ http://www.draconianoverlord.com/2014/05/26/from-xmonad-to-i3.html
 #
 # https://github.com/sgentle/caniuse-cmd
+#
+# Tigrc : https://github.com/chadrien/dotfiles/blob/master/roles/shell/files/tigrc#L10
 #
 # Capistrano : docker run --rm -it  -v `pwd`:/home -v $HOME/.ssh:/root/.ssh --workdir="/home" ruby bash -c "bundle install && bundle exec cap deploy"
 # Composer : docker run -v $(pwd):/app composer/composer install
