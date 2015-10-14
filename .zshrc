@@ -34,6 +34,12 @@ alias copy="xclip -selection c"
 alias composer='docker run -ti --rm --name composer-${PWD##*/} -v $(pwd):/app composer/composer'
 alias npm='docker run -ti --rm --name npm-${PWD##*/} -v `pwd`:/project -w /project node:4.1.1 npm'
 
+drm()  { docker rm $(docker ps -qa); }
+drme() { docker rm $(docker ps -qa --filter 'status=exited'); }
+dri()  { docker rmi $(docker images -q --filter "dangling=true"); }
+dgo() { docker exec -ti $@ bash }
+dip()  { docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"; }
+
 dcrefresh() {
 	dc stop $1 && dc rm -v -f $1 && dc up -d $1
 }
