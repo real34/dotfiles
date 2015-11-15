@@ -164,6 +164,4 @@ bar {
 
 exec --no-startup-id gnome-session
 exec --no-startup-id unity-settings-daemon
-exec --no-startup-id setxkbmap -layout fr -variant oss # allow typing "ê" instead of "^e"
 exec --no-startup-id numlockx on # turn verr num on
-exec --no-startup-id nm-applet

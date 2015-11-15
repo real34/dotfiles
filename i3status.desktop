@@ -12,6 +12,7 @@ general {
 }
 
 order += "cpu_usage"
+order += "cpu_temperature 0"
 order += "disk /"
 order += "run_watch DHCP"
 order += "run_watch VPN"
@@ -62,4 +63,8 @@ load {
 
 disk "/" {
         format = "%avail"
+}
+
+cpu_temperature 0 {
+        format = "T: %degrees°C"
 }
