@@ -30,16 +30,29 @@ export EDITOR='vim'
 # Convenient aliases
 alias http='docker run -it --rm --name http-${PWD##*/} --net=host clue/httpie'
 alias dc=docker-compose
+alias dcr='docker-compose run --rm'
 alias copy="xclip -selection c"
 alias composer='docker run -ti --rm --name composer-${PWD##*/} -v $(pwd):/app composer/composer'
-alias npm='docker run -ti --rm --name npm-${PWD##*/} -v `pwd`:/project -w /project node:4.1.1 npm'
+alias npm='docker run -ti --rm --name npm-${PWD##*/} -v `pwd`:/project -v ~/.npm:/root/.npm -w /project node:4.1.1 npm'
 
 drm()  { docker rm $(docker ps -qa); }
 drme() { docker rm $(docker ps -qa --filter 'status=exited'); }
 dri()  { docker rmi $(docker images -q --filter "dangling=true"); }
 dgo() { docker exec -ti $@ bash }
 dip()  { docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"; }
-
 dcrefresh() {
 	dc stop $1 && dc rm -v -f $1 && dc up -d $1
 }
+
+bundle()  {
+        BUNDLE_CMD=$@
+        docker run -ti --rm --name bundle-${PWD##*/} \
+                -v $HOME/.ssh:/root/.ssh \
+                -v $(pwd):/app -w /app \
+                -e BUNDLE_APP_CONFIG=/app/.bundle \
+                ruby:2.2 bash -c "eval \`ssh-agent\` && ssh-add && bundle $BUNDLE_CMD";
+}
+
+mysql()  { docker run -ti --rm mysql:5.6 mysql $@; }
+
+caddy() { docker run --rm -v $(pwd):/srv --name caddy-${PWD##*/} -P abiosoft/caddy }
