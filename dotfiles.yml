@@ -90,6 +90,11 @@
        - dunst
        - numlockx
        - xbacklight
+    - name: Required PPAs are available
+      apt_repository: repo={{ item }} state=present
+      tags: tools
+      with_items:
+       - 'ppa:zeal-developers/ppa'
     - name: Other convenient tools are installed
       apt: name={{ item }} state=present
       tags: tools
@@ -100,16 +105,21 @@
        - filezilla
        - gimp
        - htop
+       - libreoffice
        - lftp
        - meld
+       - mysql-workbench
        - pandoc
+       - openssh-server
        - shutter
        - exfat-utils
        - exfat-fuse
        - ncdu
        - tree
        - unison
+       - whois
        - xclip
+       - zeal
     - name: Thinkpad related packages are installed
       apt: name={{ item }} state=present
       tags: thinkpad
