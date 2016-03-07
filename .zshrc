@@ -28,12 +28,13 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 
 # Convenient aliases
-alias http='docker run -it --rm --name http-${PWD##*/} --net=host clue/httpie'
+alias http='docker run -it --rm --name http-${PWD##*/} -v /etc/hosts:/etc/hosts:ro --net=host clue/httpie'
 alias dc=docker-compose
 alias dcr='docker-compose run --rm'
 alias copy="xclip -selection c"
-alias composer='docker run -ti --rm --name composer-${PWD##*/} -v $(pwd):/app composer/composer'
-alias npm='docker run -ti --rm --name npm-${PWD##*/} -v `pwd`:/project -v ~/.npm:/root/.npm -w /project node:4.1.1 npm'
+alias composer='docker run -ti --rm --name composer-${PWD##*/} -v $(pwd):/app -v ~/.composer:/root/composer composer/composer'
+alias npm='docker run -ti --rm --name npm-${PWD##*/} -e NPM_CONFIG_PROGRESS=false -v `pwd`:/project -v ~/.npm:/root/.npm -w /project node:5.1.0 npm'
+alias node='docker run -ti --rm --user 1000:1000 --name node-${PWD##*/} -v `pwd`:/project -v ~/.npm:/root/.npm -w /project node:5.1.0 node'
 
 drm()  { docker rm $(docker ps -qa); }
 drme() { docker rm $(docker ps -qa --filter 'status=exited'); }
@@ -53,6 +54,6 @@ bundle()  {
                 ruby:2.2 bash -c "eval \`ssh-agent\` && ssh-add && bundle $BUNDLE_CMD";
 }
 
-mysql()  { docker run -ti --rm mysql:5.6 mysql $@; }
+mysql()  { docker run -ti --user 1000:1000 --rm mysql:5.6 mysql $@; }
 
-caddy() { docker run --rm -v $(pwd):/srv --name caddy-${PWD##*/} -P abiosoft/caddy }
+caddy() { docker run --rm --user 1000:1000 -v $(pwd):/srv --name caddy-${PWD##*/} -P abiosoft/caddy }
