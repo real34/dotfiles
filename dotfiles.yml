@@ -30,7 +30,7 @@
     - {
         role: kosssi.phpstorm,
         tags: phpstorm,
-        phpstorm_version: 9.0.2
+        phpstorm_version: "10.0.3"
       }
     - {
         role: ansiblebit.oracle-java,
@@ -48,18 +48,6 @@
             volumes: [
               "/var/run/docker.sock:/tmp/docker.sock:ro",
               "/home/pierre/dotfiles/my_nginx_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro"
-            ]
-          },
-          {
-            image: gfjardim/dropbox,
-            name: dropbox,
-            privileged: True,
-            net: host,
-            docker_user: pierre,
-            volumes: [
-              "/home/pierre/.dropbox:/home/.dropbox",
-              "/home/pierre/Dropbox:/home/Dropbox",
-              "/etc/localtime:/etc/localtime:ro"
             ]
           }
         ]
@@ -103,6 +91,8 @@
        - byzanz
        - curl
        - filezilla
+       - freemind
+       - kazam 
        - gimp
        - htop
        - libreoffice
@@ -138,6 +128,8 @@
         tags: sublimetext,
         packagecontrol_packages: [
           "AutoFileName",
+          "Dockerfile Syntax Highlighting",
+          "EditorConfig",
           "Git",
           "GitGutter",
           "SideBarEnhancements",
@@ -168,24 +160,36 @@
 # i3 bugfixes/improvements:
 #   ++ http://www.draconianoverlord.com/2014/05/26/from-xmonad-to-i3.html
 #
+# echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+#
+# Disable iBus (for IDEA at least: https://youtrack.jetbrains.com/issue/IDEA-78860)
+# Config with "localectl --no-convert set-x11-keymap fr pc104"
 # https://github.com/sgentle/caniuse-cmd
 #
 # Tigrc : https://github.com/chadrien/dotfiles/blob/master/roles/shell/files/tigrc#L10
 #
 # Capistrano : docker run --rm -it  -v `pwd`:/home -v $HOME/.ssh:/root/.ssh --workdir="/home" ruby bash -c "bundle install && bundle exec cap deploy"
 # Composer : docker run -v $(pwd):/app composer/composer install
+#   Auth.json -> home/qsdqs
 # Mysql
 #
 # Corriger l'hibernation : http://doc.ubuntu-fr.org/veille_et_hibernation
 #
 # sudo usermod -aG docker pierre ?
-# Dropbox : sudo usermod -aG users pierre
+# Dropbox
 # Vault for passwords and sensitive data: http://docs.ansible.com/ansible/playbooks_vault.html
 #
 # Skype : https://hub.docker.com/r/sameersbn/skype/
 #   docker run -it --rm --volume /usr/local/bin:/target quay.io/sameersbn/skype:latest install
 #
 # Aliases++ https://github.com/thbkrkr/dotfiles/blob/master/dotfiles/.zshrc#L45
+#
+# Zeal pour doc offline
+#
+# http://askubuntu.com/questions/292696/ubuntu-crashes-when-on-battery-power
+#   ou http://askubuntu.com/questions/598224/cpu-frequency-control ou truc du genre
+#
+# Parse : curl -s https://www.parse.com/downloads/cloud_code/installer.sh | sudo /bin/bash
 #
 # Refactoring:
 #   Nginx-proxy: move the config file by copying it where it belongs
