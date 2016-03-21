@@ -2,7 +2,6 @@
 - name: Setup the machine as a root user
   hosts: localhost
   become: yes 
-  become_user: root
   roles:
     - {
         role: flyinggecko.i3,
@@ -30,7 +29,7 @@
     - {
         role: kosssi.phpstorm,
         tags: phpstorm,
-        phpstorm_version: "10.0.3"
+        phpstorm_version: "2016.1"
       }
     - {
         role: ansiblebit.oracle-java,
@@ -62,11 +61,15 @@
         tags: shell,
         user: pierre
       }
-    - { role: devbox.chrome, tags: browser }
     - {
         role: nickjj.dnsmasq,
         tags: dnsmasq,
         dnsmasq_tld: test
+      }
+    - {
+        role: jdauphant.sublimetext,
+        sublimetext_build: 3103,
+        tags: sublimetext
       }
   tasks:
     - name: Window manager related packages are installed
@@ -122,7 +125,6 @@
   vars:
     BIN_DIR: "{{ansible_env.HOME}}/bin"
   roles:
-    - { role: jdauphant.sublimetext, tags: sublimetext }
     - {
         role: igor_mukhin.sublimetext3_packagecontrol,
         tags: sublimetext,
@@ -133,6 +135,7 @@
           "Git",
           "GitGutter",
           "SideBarEnhancements",
+          "SCSS",
           "Terminal"
         ]
       }
@@ -189,7 +192,8 @@
 # http://askubuntu.com/questions/292696/ubuntu-crashes-when-on-battery-power
 #   ou http://askubuntu.com/questions/598224/cpu-frequency-control ou truc du genre
 #
-# Parse : curl -s https://www.parse.com/downloads/cloud_code/installer.sh | sudo /bin/bash
-#
+# Chrome : 
+# - { role: devbox.chrome, tags: browser }
+# 
 # Refactoring:
 #   Nginx-proxy: move the config file by copying it where it belongs
