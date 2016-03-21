@@ -36,6 +36,9 @@ alias composer='docker run -ti --rm --name composer-${PWD##*/} -v $(pwd):/app -v
 alias npm='docker run -ti --rm --name npm-${PWD##*/} -e NPM_CONFIG_PROGRESS=false -v `pwd`:/project -v ~/.npm:/root/.npm -w /project node:5.1.0 npm'
 alias node='docker run -ti --rm --user 1000:1000 --name node-${PWD##*/} -v `pwd`:/project -v ~/.npm:/root/.npm -w /project node:5.1.0 node'
 
+alias bepo='setxkbmap -layout fr -variant bepo'
+alias fr='setxkbmap -layout fr -variant oss'
+
 drm()  { docker rm $(docker ps -qa); }
 drme() { docker rm $(docker ps -qa --filter 'status=exited'); }
 dri()  { docker rmi $(docker images -q --filter "dangling=true"); }
