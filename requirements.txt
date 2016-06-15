@@ -10,3 +10,4 @@ glennr.oh-my-zsh
 devbox.chrome
 flyinggecko.i3
 nickjj.dnsmasq
+mglaman.atom

@@ -1,7 +1,7 @@
 ---
 - name: Setup the machine as a root user
   hosts: localhost
-  become: yes 
+  become: yes
   roles:
     - {
         role: flyinggecko.i3,
@@ -29,7 +29,7 @@
     - {
         role: kosssi.phpstorm,
         tags: phpstorm,
-        phpstorm_version: "2016.1"
+        phpstorm_version: "2016.1.2"
       }
     - {
         role: ansiblebit.oracle-java,
@@ -54,7 +54,7 @@
     - {
         role: franklinkim.docker-compose,
         tags: docker,
-        docker_compose_version: 1.4.1
+        docker_compose_version: 1.7.0
       }
     - {
         role: glennr.oh-my-zsh,
@@ -68,8 +68,19 @@
       }
     - {
         role: jdauphant.sublimetext,
-        sublimetext_build: 3103,
+        sublimetext_build: 3114,
         tags: sublimetext
+      }
+    - {
+        role: mglaman.atom,
+        atom_ver : '1.8.0',
+        atom_packages_packages: [
+          'docker',
+          'editorconfig',
+          'git-time-machine',
+          'minimap',
+        ],
+        tags: atom
       }
   tasks:
     - name: Window manager related packages are installed
@@ -95,7 +106,7 @@
        - curl
        - filezilla
        - freemind
-       - kazam 
+       - kazam
        - gimp
        - htop
        - libreoffice
@@ -108,11 +119,17 @@
        - exfat-utils
        - exfat-fuse
        - ncdu
+       - python-pip
        - tree
        - unison
        - whois
        - xclip
        - zeal
+    - name: Other convenient Python tools are installed
+      pip: name={{ item }}
+      tags: tools
+      with_items:
+       - http-prompt
     - name: Thinkpad related packages are installed
       apt: name={{ item }} state=present
       tags: thinkpad
@@ -192,8 +209,10 @@
 # http://askubuntu.com/questions/292696/ubuntu-crashes-when-on-battery-power
 #   ou http://askubuntu.com/questions/598224/cpu-frequency-control ou truc du genre
 #
-# Chrome : 
+# Chrome :
 # - { role: devbox.chrome, tags: browser }
-# 
+#
+# https://github.com/donnemartin/gitsome/blob/master/README.md
+#
 # Refactoring:
 #   Nginx-proxy: move the config file by copying it where it belongs

@@ -28,7 +28,6 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 
 # Convenient aliases
-alias http='docker run -it --rm --name http-${PWD##*/} -v /etc/hosts:/etc/hosts:ro --net=host clue/httpie'
 alias dc=docker-compose
 alias dcr='docker-compose run --rm'
 alias copy="xclip -selection c"
