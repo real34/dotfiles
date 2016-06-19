@@ -97,6 +97,7 @@
       tags: tools
       with_items:
        - 'ppa:zeal-developers/ppa'
+       - 'ppa:nathan-renniewaldock/flux'
     - name: Other convenient tools are installed
       apt: name={{ item }} state=present
       tags: tools
@@ -105,6 +106,7 @@
        - byzanz
        - curl
        - filezilla
+       - fluxgui
        - freemind
        - kazam
        - gimp
