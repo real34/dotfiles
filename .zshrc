@@ -44,7 +44,7 @@ dri()  { docker rmi $(docker images -q --filter "dangling=true"); }
 dgo() { docker exec -ti $@ bash }
 dip()  { docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"; }
 dcrefresh() {
-	dc stop $1 && dc rm -v -f $1 && dc up -d $1
+	dc stop $1 && dc rm -vf --all $1 && dc up -d $1
 }
 
 bundle()  {
