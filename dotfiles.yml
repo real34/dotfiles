@@ -29,7 +29,7 @@
     - {
         role: kosssi.phpstorm,
         tags: phpstorm,
-        phpstorm_version: "2016.1.2"
+        phpstorm_version: "2016.2"
       }
     - {
         role: ansiblebit.oracle-java,
