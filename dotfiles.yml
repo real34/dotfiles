@@ -29,7 +29,7 @@
     - {
         role: kosssi.phpstorm,
         tags: phpstorm,
-        phpstorm_version: "2016.2"
+        phpstorm_version: "EAP-163.7342.9" #"2016.3"
       }
     - {
         role: ansiblebit.oracle-java,
@@ -43,7 +43,7 @@
           {
             image: jwilder/nginx-proxy,
             name: nginx-proxy,
-            ports: ["80:80"],
+            ports: ["80:80", "443:443"],
             volumes: [
               "/var/run/docker.sock:/tmp/docker.sock:ro",
               "/home/pierre/dotfiles/my_nginx_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro"
@@ -68,7 +68,7 @@
       }
     - {
         role: jdauphant.sublimetext,
-        sublimetext_build: 3114,
+        sublimetext_build: 3126,
         tags: sublimetext
       }
     - {
@@ -116,11 +116,13 @@
        - meld
        - mysql-workbench
        - pandoc
+       - pwgen
        - openssh-server
        - shutter
        - exfat-utils
        - exfat-fuse
        - ncdu
+       - p7zip
        - python-pip
        - tree
        - unison
@@ -179,6 +181,10 @@
       copy: src=.zshrc dest={{ansible_env.HOME}}/.zshrc
 
 # TODO
+# Docker DNS qui trace : dans dnsmasq.conf
+#       listen-address=127.0.0.1
+#       listen-address=172.17.0.1
+#
 # i3 bugfixes/improvements:
 #   ++ http://www.draconianoverlord.com/2014/05/26/from-xmonad-to-i3.html
 #
