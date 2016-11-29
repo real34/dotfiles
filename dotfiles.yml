@@ -102,7 +102,7 @@
       apt: name={{ item }} state=present
       tags: tools
       with_items:
-       - ack-grep
+       - silversearcher-ag
        - byzanz
        - curl
        - filezilla
