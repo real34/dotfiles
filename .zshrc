@@ -31,10 +31,13 @@ export EDITOR='vim'
 alias dc=docker-compose
 alias dcr='docker-compose run --rm'
 alias copy="xclip -selection c"
+alias y=yarn
 alias deploy='docker run -it --rm -v ~/.ssh:/root/.ssh -v $SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent -v $(pwd):/source neolao/capistrano:3.4.0 bash'
 
 alias bepo='setxkbmap -layout fr -variant bepo'
 alias fr='setxkbmap -layout fr -variant oss'
+
+alias m='make'
 
 drm()  { docker rm $(docker ps -qa); }
 drme() { docker rm $(docker ps -qa --filter 'status=exited'); }
