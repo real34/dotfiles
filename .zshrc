@@ -31,9 +31,6 @@ export EDITOR='vim'
 alias dc=docker-compose
 alias dcr='docker-compose run --rm'
 alias copy="xclip -selection c"
-alias composer='docker run -ti --rm --name composer-${PWD##*/} -v $(pwd):/app -v ~/.composer:/root/composer composer/composer'
-alias npm='docker run -ti --rm --name npm-${PWD##*/} -e NPM_CONFIG_PROGRESS=false -v `pwd`:/project -v ~/.npm:/root/.npm -w /project node:5.1.0 npm'
-alias node='docker run -ti --rm --user 1000:1000 --name node-${PWD##*/} -v `pwd`:/project -v ~/.npm:/root/.npm -w /project node:5.1.0 node'
 alias deploy='docker run -it --rm -v ~/.ssh:/root/.ssh -v $SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent -v $(pwd):/source neolao/capistrano:3.4.0 bash'
 
 alias bepo='setxkbmap -layout fr -variant bepo'
