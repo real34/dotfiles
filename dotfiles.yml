@@ -102,6 +102,7 @@
       apt: name={{ item }} state=present
       tags: tools
       with_items:
+       - asciidoctor
        - silversearcher-ag
        - byzanz
        - curl
@@ -116,8 +117,10 @@
        - meld
        - mysql-workbench
        - pandoc
+       - pv
        - pwgen
        - openssh-server
+       - owncloud-client
        - shutter
        - exfat-utils
        - exfat-fuse

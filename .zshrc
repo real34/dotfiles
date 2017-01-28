@@ -59,3 +59,7 @@ mysql()  { docker run -ti --user 1000:1000 --rm mysql:5.6 mysql $@; }
 caddy() {
 	docker run -d --user 1000:1000 -v $(pwd):/srv --name caddy-${PWD##*/} -e VIRTUAL_PORT=2015 -e VIRTUAL_HOST=${PWD##*/}.test -P abiosoft/caddy
 }
+
+ngrok() {
+  docker run --rm -it --link "$1":http wernight/ngrok ngrok http http:"$2"
+}
