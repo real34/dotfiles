@@ -83,6 +83,8 @@
         tags: atom
       }
   tasks:
+    - name: Ensure package definition is up-to-date, aka "apt-get update"
+      apt: update_cache=yes cache_valid_time=3600
     - name: Window manager related packages are installed
       apt: name={{ item }} state=present
       tags: windowmanager
