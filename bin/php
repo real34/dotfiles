@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run -ti --rm --user 1000:1000 --name php-${PWD##*/} -v `pwd`:/project -w /project php:latest php "$@"
+docker run -ti --rm --user 1000:1000 --name php-${PWD##*/} -v $(pwd):$(pwd) -w $(pwd) php:latest php "$@"

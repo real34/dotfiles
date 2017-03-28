@@ -66,3 +66,11 @@ caddy() {
 ngrok() {
   docker run --rm -it --link "$1":http wernight/ngrok ngrok http http:"$2"
 }
+
+ctop() {
+  docker run -ti -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest
+}
+
+jq() {
+  docker run -i pinterb/jq:latest $@
+}

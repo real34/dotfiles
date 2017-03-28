@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run -ti --rm --user 1000:1000 --name yarn-${PWD##*/} -v `pwd`:/project -v ~/.yarn:/home/node/.cache/yarn -w /project kkarczmarczyk/node-yarn:latest yarn "$@"
+docker run -ti --rm --user 1000:1000 --name yarn-${PWD##*/} -v ~/.yarn:/home/node/.cache/yarn -v $(pwd):$(pwd) -w $(pwd) kkarczmarczyk/node-yarn:latest yarn "$@"

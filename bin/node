@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run -ti --rm --name node-${PWD##*/} -v `pwd`:/project -v ~/.npm:/root/.npm -w /project node:7.4-alpine node "$@"
+docker run -ti --rm --name node-${PWD##*/} -v -v $(pwd):$(pwd) -w $(pwd) -v ~/.npm:/root/.npm node:7.4-alpine node "$@"

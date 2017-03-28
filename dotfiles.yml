@@ -137,6 +137,7 @@
       tags: tools
       with_items:
        - http-prompt
+       - httpie-oauth
     - name: Thinkpad related packages are installed
       apt: name={{ item }} state=present
       tags: thinkpad
@@ -187,6 +188,8 @@
 # Docker DNS qui trace : dans dnsmasq.conf
 #       listen-address=127.0.0.1
 #       listen-address=172.17.0.1
+#
+# https://github.com/sindresorhus/pure#getting-started instead of oh-my-zsh
 #
 # i3 bugfixes/improvements:
 #   ++ http://www.draconianoverlord.com/2014/05/26/from-xmonad-to-i3.html

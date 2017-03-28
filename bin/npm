@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run -ti --rm --name npm-${PWD##*/} -e NPM_CONFIG_PROGRESS=false -v `pwd`:/project -v ~/.npm:/root/.npm -w /project node:7.4-alpine npm "$@"
+docker run -ti --rm --name npm-${PWD##*/} -e NPM_CONFIG_PROGRESS=false -v $(pwd):$(pwd) -w $(pwd) -v ~/.npm:/root/.npm node:7.4-alpine npm "$@"
