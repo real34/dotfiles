@@ -29,7 +29,7 @@
     - {
         role: kosssi.phpstorm,
         tags: phpstorm,
-        phpstorm_version: "2017.1.1"
+        phpstorm_version: "2017.2.1"
       }
     - {
         role: ansiblebit.oracle-java,
@@ -100,6 +100,8 @@
       with_items:
        - 'ppa:zeal-developers/ppa'
        - 'ppa:nathan-renniewaldock/flux'
+      #  Distro too old! Need to upgrade kid
+      #  - 'ppa:peek-developers/stable'
     - name: Other convenient tools are installed
       apt: name={{ item }} state=present
       tags: tools
@@ -119,6 +121,7 @@
        - meld
        - mysql-workbench
        - pandoc
+      #  - peek
        - pv
        - pwgen
        - openssh-server
@@ -193,6 +196,8 @@
 #
 # https://github.com/sindresorhus/pure#getting-started instead of oh-my-zsh
 #
+# Thunderbird addon when upgraded - https://addons.mozilla.org/fr/thunderbird/addon/grammalecte-fr-thunderbird/
+#
 # i3 bugfixes/improvements:
 #   ++ http://www.draconianoverlord.com/2014/05/26/from-xmonad-to-i3.html
 #
@@ -227,8 +232,11 @@
 #
 # Chrome :
 # - { role: devbox.chrome, tags: browser }
+# Brave: https://github.com/brave/browser-laptop/blob/master/docs/linuxInstall.md
 #
 # https://github.com/donnemartin/gitsome/blob/master/README.md
+#
+# https://github.com/sharkdp/fd
 #
 # Refactoring:
 #   Nginx-proxy: move the config file by copying it where it belongs

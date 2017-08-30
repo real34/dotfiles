@@ -74,3 +74,7 @@ ctop() {
 jq() {
   docker run -i pinterb/jq:latest $@
 }
+
+function genpass() {
+    < /dev/urandom tr -dc A-Za-z0-9 | head -c "${1:-32}"
+}

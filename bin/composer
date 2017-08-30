@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run -ti --rm --name composer-${PWD##*/} -v $(pwd):$(pwd) -w $(pwd) -v ~/.composer:/root/composer composer/composer "$@"
+docker run -ti --rm --name composer-${PWD##*/} -v $(pwd):$(pwd) -w $(pwd) -v ~/.composer:/composer composer/composer "$@"
