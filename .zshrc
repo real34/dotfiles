@@ -27,6 +27,8 @@ source $ZSH/oh-my-zsh.sh
 # Preferred editor for local and remote sessions
 export EDITOR='vim'
 
+export WHALEBREW_INSTALL_PATH=$HOME/bin
+
 # Convenient aliases
 alias dc=docker-compose
 alias dcr='docker-compose run --rm'
@@ -38,6 +40,7 @@ alias bepo='setxkbmap -layout fr -variant bepo'
 alias fr='setxkbmap -layout fr -variant oss'
 
 alias m='make'
+alias t='task'
 
 drm()  { docker rm $(docker ps -qa); }
 drme() { docker rm $(docker ps -qa --filter 'status=exited'); }
@@ -45,7 +48,7 @@ dri()  { docker rmi $(docker images -q --filter "dangling=true"); }
 dgo() { docker exec -ti $@ bash }
 dip()  { docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"; }
 dcrefresh() {
-	dc stop -t0 $1 && dc rm -vf --all $1 && dc up -d $1
+	dc stop -t0 $1 && dc rm -vf $1 && dc up -d $1
 }
 
 bundle()  {

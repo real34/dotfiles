@@ -29,7 +29,7 @@
     - {
         role: kosssi.phpstorm,
         tags: phpstorm,
-        phpstorm_version: "2017.2.1"
+        phpstorm_version: "2017.2.4"
       }
     - {
         role: ansiblebit.oracle-java,
@@ -237,6 +237,8 @@
 # https://github.com/donnemartin/gitsome/blob/master/README.md
 #
 # https://github.com/sharkdp/fd
+#
+# Stow: http://sametmax.com/regrouper-ses-fichiers-de-settings-avec-stow/
 #
 # Refactoring:
 #   Nginx-proxy: move the config file by copying it where it belongs
