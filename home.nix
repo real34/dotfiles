@@ -5,7 +5,28 @@ let
 in
 {
   home.packages = with pkgs; [
-    fasd
+    latest.wget
+    latest.curl
+    latest.httpie
+
+    latest.fasd
+    latest.ripgrep
+    latest.tree
+    latest.ncdu
+    latest.pv
+    latest.jq
+    latest.whois
+    latest.gnumake
+
+    latest.atool
+    latest.unzip
+    latest.zip
+    latest.p7zip
+
+    latest.pass
+
+    latest.pcmanfm
+    latest.udiskie
 
     latest.gitAndTools.gitflow latest.gitAndTools.tig
 
@@ -16,6 +37,8 @@ in
 
     unclutter-xfixes
 
+    python
+
     # Peek. See https://github.com/NixOS/nixpkgs/issues/39832
     peek
       ffmpeg
@@ -25,7 +48,11 @@ in
       keybinder
   ];
 
+  # Doc: https://rycee.gitlab.io/home-manager/options.html
+
   services.unclutter.enable = true;
+  services.parcellite.enable = true;
+  services.gpg-agent.enable = true;
 
   programs.home-manager = {
     enable = true;
@@ -76,6 +103,7 @@ in
       t = "task";
       p = "pass";
       tg = "tig --all";
+      tgs = "tig status";
     };
   };
 
@@ -101,8 +129,22 @@ in
       ".vscode"
     ];
   };
+
+  programs.htop = {
+    enable = true;
+  };
+
+  programs.browserpass = {
+    enable = true;
+    browsers = [ "firefox" ];
+  };
+
+  programs.vim = {
+    enable = true;
+  };
 }
 
 # TODO
 #
-# - setup GPG: Git, pass etc...
+# - setup GPG for Git, mails etc...
+# - try fzf?
