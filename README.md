@@ -1,2 +1,3 @@
 # dotfiles
-My dotfiles, powered by Ansible
+
+My dotfiles for NixOs, using home-manager.
