@@ -30,14 +30,18 @@ in
 
     latest.gitAndTools.gitflow latest.gitAndTools.tig
 
+    firefox
     google-chrome-beta
+    latest.google-play-music-desktop-player
 
     latest.vscode
     latest.jetbrains.phpstorm
 
     unclutter-xfixes
+    latest.playerctl latest.numlockx
 
     python
+    latest.docker latest.docker_compose
 
     # Peek. See https://github.com/NixOS/nixpkgs/issues/39832
     peek
@@ -46,6 +50,9 @@ in
       gst_all_1.gst-plugins-good
       gst_all_1.gst-plugins-ugly
       keybinder
+
+    # urxvt. See https://github.com/rycee/home-manager/blob/master/modules/programs/urxvt.nix
+    latest.rxvt_unicode-with-plugins
   ];
 
   # Doc: https://rycee.gitlab.io/home-manager/options.html
@@ -58,6 +65,13 @@ in
     enable = true;
     path = https://github.com/rycee/home-manager/archive/release-18.03.tar.gz;
   };
+
+  ## TODO Enable when available in this current branch of
+  ## Home manager, or switch to master
+  # programs.urxvt = {
+  #   enable = true;
+  #   package = latest.rxvt_unicode-with-plugins;
+  # };
 
   programs.zsh = {
     enable = true;
@@ -141,6 +155,17 @@ in
 
   programs.vim = {
     enable = true;
+  };
+
+  programs.autorandr = {
+    enable = true;
+    hooks = {
+      postswitch = {
+        "notify-i3" = "${pkgs.i3}/bin/i3-msg restart";
+      };
+    };
+
+    #TODO profiles
   };
 }
 
