@@ -89,6 +89,10 @@ in
       plugins = [ "git" "git-flow" "docker" "ssh-agent" "last-working-dir" "fasd" ];
     };
 
+    initExtra = "
+      bindkey ' ' forward-word
+    ";
+
     sessionVariables = {
       EDITOR = "vim";
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=7";
