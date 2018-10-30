@@ -17,6 +17,7 @@ in
     latest.jq
     latest.whois
     latest.gnumake
+    latest.file
 
     latest.atool
     latest.unzip
@@ -28,20 +29,35 @@ in
     latest.pcmanfm
     latest.udiskie
 
-    latest.gitAndTools.gitflow latest.gitAndTools.tig
+    latest.gitAndTools.gitflow
+    latest.gitAndTools.tig
 
     firefox
     google-chrome-beta
+    latest.thunderbird
+    latest.rambox
+    latest.libreoffice
+    latest.freemind
+    latest.filezilla
+    latest.shutter
+    latest.gimp
+    latest.skypeforlinux
+    latest.zoom-us
+
     latest.google-play-music-desktop-player
+    latest.vlc
 
     latest.vscode
     latest.jetbrains.phpstorm
+    latest.zeal
+    latest.apache-directory-studio
 
     unclutter-xfixes
     latest.playerctl latest.numlockx
 
     python
-    latest.docker latest.docker_compose
+    latest.docker
+    latest.docker_compose
 
     # Peek. See https://github.com/NixOS/nixpkgs/issues/39832
     peek
