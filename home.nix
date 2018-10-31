@@ -40,6 +40,7 @@ network = "traefik"
     latest.whois
     latest.gnumake
     latest.file
+    latest.bc
 
     latest.atool
     latest.unzip
