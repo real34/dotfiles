@@ -108,6 +108,40 @@ in
       keybindings = pkgs.lib.mkOptionDefault {
           "${modifier}+Return" = "exec urxvtc";
 
+          ### BÉPO ###
+          # change container layout (stacked, tabbed, toggle split)
+          "${modifier}+u" = "layout stacking";
+          "${modifier}+eacute" = "layout tabbed";
+          "${modifier}+p" = "layout toggle split";
+          # switch to workspace
+          "${modifier}+quotedbl" = "workspace 1";
+          "${modifier}+guillemotleft" = "workspace 2";
+          "${modifier}+guillemotright" = "workspace 3";
+          "${modifier}+parenleft" = "workspace 4";
+          "${modifier}+parenright" = "workspace 5";
+          "${modifier}+at" = "workspace 6";
+          "${modifier}+plus" = "workspace 7";
+          "${modifier}+minus" = "workspace 8";
+          "${modifier}+slash" = "workspace 9";
+          "${modifier}+asterisk" = "workspace 10";
+          # move workspaces between outputs
+          "${modifier}+Control+Left" = "move workspace to output left";
+          "${modifier}+Control+Right" = "move workspace to output right";
+          "${modifier}+Control+Up" = "move workspace to output up";
+          "${modifier}+Control+Down" = "move workspace to output down";
+          # move focused container to workspace
+          "${modifier}+Shift+quotedbl" = "move container to workspace 1";
+          "${modifier}+Shift+guillemotleft" = "move container to workspace 2";
+          "${modifier}+Shift+guillemotright" = "move container to workspace 3";
+          "${modifier}+Shift+4" = "move container to workspace 4";
+          "${modifier}+Shift+5" = "move container to workspace 5";
+          "${modifier}+Shift+at" = "move container to workspace 6";
+          "${modifier}+Shift+plus" = "move container to workspace 7";
+          "${modifier}+Shift+minus" = "move container to workspace 8";
+          "${modifier}+Shift+slash" = "move container to workspace 9";
+          "${modifier}+Shift+asterisk" = "move container to workspace 10";
+          ### /BÉPO ###
+
           # See https://faq.i3wm.org/question/3747/enabling-multimedia-keys.1.html
           # Pulse Audio controls
           # bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
