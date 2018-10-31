@@ -170,7 +170,9 @@ in
         { command = "udiskie"; notification = false; }
         { command = "parcellite -d"; notification = false; }
         { command = "numlockx on"; notification = false; } # turn verr num on
-        #{ command = "docker start nginx-proxy "; notification = false; }# docker run -d -p 8080:8080 -p 81:80 -v /dev/null:/etc/traefik/traefik.toml -v /var/run/docker.sock:/var/run/docker.sock --name traefik traefik --web --docker --docker.domain=test --logLevel=INFO
+
+        # docker run -d --net traefik --ip 172.10.0.10 --restart always -v /dev/null:/etc/traefik/traefik.toml -v /var/run/docker.sock:/var/run/docker.sock:ro --name traefik --label traefik.port=8080 traefik --web --docker --docker.domain=test --logLevel=INFO
+        { command = "docker start traefik"; notification = false; }
       ];
     };
   };
