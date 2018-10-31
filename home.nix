@@ -187,9 +187,12 @@ in
       plugins = [ "git" "git-flow" "docker" "ssh-agent" "last-working-dir" "fasd" ];
     };
 
-    initExtra = "
+    # `$` must be escaped with `''` :metal:
+    # source: https://nixos.org/nix-dev/2015-December/019018.html
+    initExtra = ''
       bindkey ' ' forward-word
-    ";
+      zstyle ':completion:*:hosts' hosts ''${=''${''${''${''${(@M)''${(f)"''$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
+    '';
 
     sessionVariables = {
       EDITOR = "vim";
