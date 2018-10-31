@@ -111,6 +111,8 @@ in
           "${modifier}+Return" = "exec urxvtc";
 
           ### BÉPO ###
+          "${modifier}+b" = "kill";
+          "${modifier}+i" = "exec ${pkgs.dmenu}/bin/dmenu_run";
           # change container layout (stacked, tabbed, toggle split)
           "${modifier}+u" = "layout stacking";
           "${modifier}+eacute" = "layout tabbed";
