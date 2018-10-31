@@ -113,6 +113,7 @@ in
           ### BÉPO ###
           "${modifier}+b" = "kill";
           "${modifier}+i" = "exec ${pkgs.dmenu}/bin/dmenu_run";
+          "${modifier}+e" = "fullscreen toggle";
           # change container layout (stacked, tabbed, toggle split)
           "${modifier}+u" = "layout stacking";
           "${modifier}+eacute" = "layout tabbed";
@@ -227,6 +228,7 @@ in
 
       dc = "docker-compose";
       dcr = "docker-compose run --rm";
+      dcrm = "docker-compose rm -fsv";
       copy = "xclip -selection c";
       deploy = "docker run -it --rm -v ~/.ssh:/root/.ssh -v $SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent -v $(pwd):/source neolao/capistrano:3.4.0 bash";
 
