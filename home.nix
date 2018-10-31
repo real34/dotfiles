@@ -26,6 +26,8 @@ in
 
     latest.pass
 
+    latest.arandr
+    latest.feh
     latest.pcmanfm
     latest.udiskie
 
@@ -184,7 +186,16 @@ in
     oh-my-zsh = {
       enable = true;
       theme = "robbyrussell";
-      plugins = [ "git" "git-flow" "docker" "ssh-agent" "last-working-dir" "fasd" ];
+      plugins = [
+        "docker"
+        "fasd"
+        "git"
+        "git-flow"
+        "httpie"
+        "last-working-dir"
+        "pass"
+        "ssh-agent"
+      ];
     };
 
     # `$` must be escaped with `''` :metal:
@@ -223,6 +234,8 @@ in
       p = "pass";
       tg = "tig --all";
       tgs = "tig status";
+      tgl = "tig status";
+      tgb = "tig blame -C";
     };
   };
 
