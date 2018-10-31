@@ -4,6 +4,28 @@ let
   latest = import <nixpkgs>{};
 in
 {
+  home.file.".config/traefik/traefik.toml".text = ''
+logLevel = "INFO"
+defaultEntryPoints = ["http", "https"]
+
+[web]
+address = ":8080"
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+
+[docker]
+domain = "test"
+watch = true
+network = "traefik"
+  '';
+
   home.packages = with pkgs; [
     latest.wget
     latest.curl
@@ -172,7 +194,7 @@ in
         { command = "parcellite -d"; notification = false; }
         { command = "numlockx on"; notification = false; } # turn verr num on
 
-        # docker run -d --net traefik --ip 172.10.0.10 --restart always -v /dev/null:/etc/traefik/traefik.toml -v /var/run/docker.sock:/var/run/docker.sock:ro --name traefik --label traefik.port=8080 traefik --web --docker --docker.domain=test --logLevel=INFO
+        # docker run -d --net traefik --ip 172.10.0.10 --restart always -v $HOME/.config/traefik/traefik.toml:/etc/traefik/traefik.toml -v /var/run/docker.sock:/var/run/docker.sock:ro --name traefik --label traefik.port=8080 traefik
         { command = "docker start traefik"; notification = false; }
       ];
     };
