@@ -29,6 +29,8 @@ network = "traefik"
     latest.curl
     latest.httpie
 
+    latest.pavucontrol
+
     latest.fasd
     latest.ripgrep
     latest.tree
@@ -79,6 +81,7 @@ network = "traefik"
     latest.playerctl latest.numlockx
 
     python
+    latest.nodejs
     latest.docker
     latest.docker_compose
 
@@ -229,6 +232,19 @@ network = "traefik"
     initExtra = ''
       bindkey ' ' forward-word
       zstyle ':completion:*:hosts' hosts ''${=''${''${''${''${(@M)''${(f)"''$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
+
+m2wipe() {
+  echo "Pouf pouf pouf…"
+  sudo rm -rf $1/generated $1/var/cache/**/* $1/pub/static/* $1/var/page_cache $1/var/view_preprocessed
+  mkdir $1/generated
+  sudo chmod -R 777 $1/{var,pub,generated,app/etc}
+  echo "… tchak !"
+}
+
+dip()  { docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"; }
+dcrefresh() {
+	dc stop -t0 $1 && dc rm -vf $1 && dc up -d $1
+}
     '';
 
     sessionVariables = {
