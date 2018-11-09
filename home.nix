@@ -28,6 +28,7 @@ network = "traefik"
     latest.wget
     latest.curl
     latest.httpie
+    latest.bind
 
     latest.pavucontrol
 
@@ -41,6 +42,7 @@ network = "traefik"
     latest.gnumake
     latest.file
     latest.bc
+    latest.sc-im
 
     latest.atool
     latest.unzip
@@ -279,6 +281,10 @@ dcrefresh() {
       tgs = "tig status";
       tgl = "tig status";
       tgb = "tig blame -C";
+
+      # for some reasons `light -k -S 100` does not work for me… TODO find why, and uninstall upower
+      klon = "dbus-send --system --type=method_call  --dest=\"org.freedesktop.UPower\" \"/org/freedesktop/UPower/KbdBacklight\" \"org.freedesktop.UPower.KbdBacklight.SetBrightness\" int32:100";
+      kloff = "light -k -S 0";
     };
   };
 
