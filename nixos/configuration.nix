@@ -11,18 +11,21 @@
     ];
 
   # Use the GRUB 2 boot loader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
+  # boot.loader.grub.enable = true;
+  # boot.loader.grub.version = 2;
   # boot.loader.grub.efiSupport = true;
   # boot.loader.grub.efiInstallAsRemovable = true;
   # boot.loader.efi.efiSysMountPoint = "/boot/efi";
   # Define on which hard drive you want to install Grub.
-  boot.loader.grub.device = "/dev/nvme0n1"; # or "nodev" for efi only
+  # boot.loader.grub.device = "nodev"; # or "nodev" for efi only
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   boot.cleanTmpDir = true;
 
   networking.hostName = "pierre"; # Define your hostname.
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true;  # Gnome is forcing us to use networkManager https://nixos.org/nixos/manual/index.html#sec-networkmanager
 
   hardware.trackpoint.enable = true;
   hardware.trackpoint.emulateWheel = true;
@@ -30,9 +33,9 @@
   hardware.trackpoint.sensitivity = 150;
 
   # Select internationalisation properties.
-  i18n = {
-    consoleKeyMap = "fr-bepo";
-  };
+  # i18n = {
+  #   consoleKeyMap = "fr-bepo";
+  # };
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -91,7 +94,7 @@ local-data: "test. 10800 IN A 172.10.0.10"
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "fr";
-  services.xserver.xkbVariant = "bepo";
+  # services.xserver.xkbVariant = "bepo";
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable touchpad support.
