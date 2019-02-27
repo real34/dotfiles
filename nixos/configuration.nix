@@ -27,6 +27,8 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Gnome is forcing us to use networkManager https://nixos.org/nixos/manual/index.html#sec-networkmanager
 
+  hardware.bluetooth.enable = true;
+
   hardware.trackpoint.enable = true;
   hardware.trackpoint.emulateWheel = true;
   hardware.trackpoint.speed = 250;
@@ -50,6 +52,7 @@
     docker
     firefox
     unbound
+    blueman
   ];
 
   # Specific configuration
@@ -89,7 +92,14 @@ local-data: "test. 10800 IN A 172.10.0.10"
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+
+    # NixOS allows either a lightweight build (default) or full build of PulseAudio to be installed.
+    # Only the full build has Bluetooth support, so it must be selected here.
+    package = pkgs.pulseaudioFull;
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
+  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;

@@ -104,6 +104,7 @@ network = "traefik"
   services.unclutter.enable = true;
   services.parcellite.enable = true;
   services.gpg-agent.enable = true;
+  services.blueman-applet.enable = true;
 
   programs.home-manager = {
     enable = true;
