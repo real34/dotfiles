@@ -88,6 +88,7 @@ network = "traefik"
     latest.docker_compose
     latest.pandoc
     latest.libpng12
+    latest.gcc
 
     # Peek. See https://github.com/NixOS/nixpkgs/issues/39832
     peek
