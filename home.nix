@@ -29,6 +29,11 @@ network = "traefik"
     latest.curl
     latest.httpie
     latest.bind
+    latest.gcc
+    latest.openssl.dev
+    latest.patchelf
+    latest.postman
+    latest.cnijfilter_4_00
 
     latest.pavucontrol
 
@@ -50,6 +55,11 @@ network = "traefik"
     latest.p7zip
 
     latest.pass
+    latest.lastpass-cli
+    latest.bitwarden-cli
+    latest.yubico-pam
+    latest.yubikey-manager
+    latest.pam_u2f
 
     latest.arandr
     latest.feh
@@ -58,24 +68,30 @@ network = "traefik"
 
     latest.gitAndTools.gitflow
     latest.gitAndTools.tig
+    latest.gnome3.meld
 
     firefox
-    google-chrome-beta
+    latest.google-chrome-beta
     latest.thunderbird
     latest.rambox
+    latest.slack
+    latest.signal-desktop
+    latest.mumble
+    latest.zoom-us
     latest.libreoffice
     latest.freemind
     latest.filezilla
     latest.shutter
     latest.gimp
-    latest.skypeforlinux
-    latest.zoom-us
+    latest.copyq
+    latest.wireshark
 
     latest.google-play-music-desktop-player
     latest.vlc
 
+    latest.jetbrains-mono
     latest.vscode
-    latest.jetbrains.phpstorm
+    jetbrains.phpstorm
     latest.zeal
     latest.apache-directory-studio
 
@@ -83,29 +99,27 @@ network = "traefik"
     latest.playerctl latest.numlockx
 
     python
-    latest.nodejs
+    ruby
+    latest.nodejs-10_x
     latest.docker
     latest.docker_compose
-    latest.pandoc
-    latest.libpng12
-    latest.gcc
+    latest.php
+    latest.php73Packages.composer
 
-    # Peek. See https://github.com/NixOS/nixpkgs/issues/39832
-    peek
-      ffmpeg
-      glib
-      gst_all_1.gst-plugins-good
-      gst_all_1.gst-plugins-ugly
-      keybinder
+    latest.alacritty
 
-    # urxvt. See https://github.com/rycee/home-manager/blob/master/modules/programs/urxvt.nix
-    latest.rxvt_unicode-with-plugins
+    # OcciPrint
+    latest.hplipWithPlugin
+
+    # Perso
+    latest.nextcloud-client
+    latest.rclone
   ];
 
   # Doc: https://rycee.gitlab.io/home-manager/options.html
 
   services.unclutter.enable = true;
-  services.parcellite.enable = true;
+#  services.parcellite.enable = true;
   services.gpg-agent.enable = true;
   services.blueman-applet.enable = true;
 
@@ -114,12 +128,11 @@ network = "traefik"
     path = https://github.com/rycee/home-manager/archive/release-18.03.tar.gz;
   };
 
-  ## TODO Enable when available in this current branch of
-  ## Home manager, or switch to master
-  # programs.urxvt = {
-  #   enable = true;
-  #   package = latest.rxvt_unicode-with-plugins;
-  # };
+#  programs.alacritty.settings = {
+#    font = {
+#      size = 11;
+#    };
+#  };
 
   # TODO polybar
   xsession.windowManager.i3 = let
@@ -138,11 +151,12 @@ network = "traefik"
 
       # see https://rycee.gitlab.io/home-manager/options.html#opt-xsession.windowManager.i3.config.keybindings
       keybindings = pkgs.lib.mkOptionDefault {
-          "${modifier}+Return" = "exec urxvtc";
+          #"${modifier}+Return" = "exec i3-sensible-terminal";
+          "${modifier}+Return" = "exec alacritty";
 
           ### BÉPO ###
           "${modifier}+b" = "kill";
-          "${modifier}+i" = "exec ${pkgs.dmenu}/bin/dmenu_run";
+          #Alfred "${modifier}+i" = "exec ${pkgs.dmenu}/bin/dmenu_run";
           "${modifier}+e" = "fullscreen toggle";
           # change container layout (stacked, tabbed, toggle split)
           "${modifier}+u" = "layout stacking";
@@ -195,11 +209,13 @@ network = "traefik"
         };
 
       startup = [
-        # { command = "dropbox start"; notification = false; }
+        { command = "nextcloud"; notification = false; }
         { command = "setxkbmap -layout fr -variant bepo"; notification = false; }
-        { command = "urxvtd -q -o -f"; notification = false; }
+        { command = "alacritty"; notification = false; }
         { command = "udiskie"; notification = false; }
-        { command = "parcellite -d"; notification = false; }
+        #{ command = "parcellite -d"; notification = false; }
+        { command = "albert"; notification = false; }
+        { command = "copyq"; notification = false; }
         { command = "numlockx on"; notification = false; } # turn verr num on
 
         # docker run -d --net traefik --ip 172.10.0.10 --restart always -v $HOME/.config/traefik/traefik.toml:/etc/traefik/traefik.toml -v /var/run/docker.sock:/var/run/docker.sock:ro --name traefik --label traefik.port=8080 traefik
@@ -238,6 +254,8 @@ network = "traefik"
     initExtra = ''
       bindkey ' ' forward-word
       zstyle ':completion:*:hosts' hosts ''${=''${''${''${''${(@M)''${(f)"''$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
+      setopt PROMPT_CR
+      setopt PROMPT_SP
 
 m2wipe() {
   echo "Pouf pouf pouf…"
@@ -256,6 +274,7 @@ dcrefresh() {
     sessionVariables = {
       EDITOR = "vim";
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=7";
+      TERMINAL = "alacritty";
     };
 
     shellAliases = {
@@ -296,11 +315,12 @@ dcrefresh() {
     enable = true;
     package = latest.gitAndTools.gitFull;
 
-    userEmail = "pierre@occitech.fr";
+    userEmail = "pierre@front-commerce.com";
     userName = "Pierre Martin";
 
     aliases = {
       co = "checkout";
+      mr = "!sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -";
     };
 
     ignores = [
@@ -313,15 +333,15 @@ dcrefresh() {
       ".idea"
       ".vscode"
     ];
+
+    extraConfig = {
+      merge.tool = "meld";
+      diff.algorithm = "patience";
+    };
   };
 
   programs.htop = {
     enable = true;
-  };
-
-  programs.browserpass = {
-    enable = true;
-    browsers = [ "firefox" ];
   };
 
   programs.vim = {

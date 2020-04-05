@@ -11,15 +11,16 @@
     ];
 
   # Use the GRUB 2 boot loader.
-  # boot.loader.grub.enable = true;
-  # boot.loader.grub.version = 2;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
   # boot.loader.grub.efiSupport = true;
   # boot.loader.grub.efiInstallAsRemovable = true;
   # boot.loader.efi.efiSysMountPoint = "/boot/efi";
   # Define on which hard drive you want to install Grub.
-  # boot.loader.grub.device = "nodev"; # or "nodev" for efi only
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.device = "/dev/nvme0n1"; # or "nodev" for efi only
+  # Perso only ? (and comment grub.enable / version above)
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
 
   boot.cleanTmpDir = true;
 
@@ -35,9 +36,9 @@
   hardware.trackpoint.sensitivity = 150;
 
   # Select internationalisation properties.
-  # i18n = {
-  #   consoleKeyMap = "fr-bepo";
-  # };
+  i18n = {
+    consoleKeyMap = "fr-bepo";
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -53,6 +54,12 @@
     firefox
     unbound
     blueman
+
+    # Yubikey
+    libu2f-host
+    yubikey-manager
+    yubikey-personalization-gui
+    pcsclite
   ];
 
   # Specific configuration
@@ -70,6 +77,8 @@
   services.nixosManual.showManual = true;
   services.tlp.enable = true;
   services.upower.enable = true; # keyboard backlight
+  services.gnome3.at-spi2-core.enable = true; # see https://github.com/NixOS/nixpkgs/pull/49636/files
+  services.blueman.enable = true;
 
   # see https://github.com/NixOS/nixpkgs/blob/2380f6a4faa57c6b91fed26c496e1c8ca5d91982/nixos/modules/services/networking/unbound.nix#L52
   services.unbound = {
@@ -89,6 +98,7 @@ local-data: "test. 10800 IN A 172.10.0.10"
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.printing.drivers = [ pkgs.hplip ];
 
   # Enable sound.
   sound.enable = true;
@@ -104,7 +114,7 @@ local-data: "test. 10800 IN A 172.10.0.10"
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "fr";
-  # services.xserver.xkbVariant = "bepo";
+  services.xserver.xkbVariant = "bepo";
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable touchpad support.
@@ -114,13 +124,17 @@ local-data: "test. 10800 IN A 172.10.0.10"
   services.xserver.displayManager.gdm.wayland = false;
   services.xserver.windowManager.i3.enable = true;
 
+  # See https://nixos.wiki/wiki/Yubikey
+  services.udev.packages = [ pkgs.yubikey-personalization pkgs.libu2f-host ];
+  services.pcscd.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.pierre = {
      isNormalUser = true;
      uid = 1000;
      home = "/home/pierre";
      shell = pkgs.zsh;
-     extraGroups = [ "audio" "wheel" "networkmanager" "docker" ];
+     extraGroups = [ "audio" "wheel" "networkmanager" "docker" "video" ];
   };
 
   system.autoUpgrade.enable = true;
