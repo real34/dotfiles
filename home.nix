@@ -125,14 +125,14 @@ network = "traefik"
 
   programs.home-manager = {
     enable = true;
-    path = https://github.com/rycee/home-manager/archive/release-18.03.tar.gz;
+    path = https://github.com/rycee/home-manager/archive/release-19.09.tar.gz;
   };
 
-#  programs.alacritty.settings = {
-#    font = {
-#      size = 11;
-#    };
-#  };
+  programs.alacritty.settings = {
+    font = {
+      size = 11;
+    };
+  };
 
   # TODO polybar
   xsession.windowManager.i3 = let
