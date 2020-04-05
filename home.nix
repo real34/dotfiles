@@ -35,6 +35,11 @@ network = "traefik"
     latest.postman
     latest.cnijfilter_4_00
 
+    # latest.pandoc
+    # latest.libpng12
+    # latest.binutils
+    # latest.glibc
+
     latest.pavucontrol
 
     latest.fasd
@@ -53,6 +58,7 @@ network = "traefik"
     latest.unzip
     latest.zip
     latest.p7zip
+    latest.unrar
 
     latest.pass
     latest.lastpass-cli
@@ -73,6 +79,7 @@ network = "traefik"
     firefox
     latest.google-chrome-beta
     latest.thunderbird
+      latest.claws-mail
     latest.rambox
     latest.slack
     latest.signal-desktop
@@ -85,6 +92,7 @@ network = "traefik"
     latest.gimp
     latest.copyq
     latest.wireshark
+    latest.rclone
 
     latest.google-play-music-desktop-player
     latest.vlc
@@ -94,6 +102,8 @@ network = "traefik"
     jetbrains.phpstorm
     latest.zeal
     latest.apache-directory-studio
+    latest.calibre
+    latest.wine
 
     unclutter-xfixes
     latest.playerctl latest.numlockx
