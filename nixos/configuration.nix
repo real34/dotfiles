@@ -97,8 +97,9 @@ local-data: "test. 10800 IN A 172.10.0.10"
   networking.firewall.enable = false;
 
   # Enable CUPS to print documents.
+  nixpkgs.config.allowUnfree = true;
   services.printing.enable = true;
-  services.printing.drivers = [ pkgs.hplip ];
+  services.printing.drivers = [ pkgs.hplip pkgs.gutenprint pkgs.cnijfilter_4_00 ];
 
   # Enable sound.
   sound.enable = true;

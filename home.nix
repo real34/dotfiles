@@ -33,7 +33,6 @@ network = "traefik"
     latest.openssl.dev
     latest.patchelf
     latest.postman
-    latest.cnijfilter_4_00
 
     latest.pavucontrol
 
