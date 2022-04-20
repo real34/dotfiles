@@ -11,18 +11,27 @@ defaultEntryPoints = ["http", "https"]
 [web]
 address = ":8080"
 
-[entryPoints]
-  [entryPoints.http]
-  address = ":80"
-  [entryPoints.https]
-  address = ":443"
-    [entryPoints.https.tls]
+# [entryPoints]
+#   [entryPoints.http]
+#   address = ":80"
+#   [entryPoints.https]
+#   address = ":443"
+#     [entryPoints.https.tls]
 
 [docker]
 domain = "test"
 watch = true
 network = "traefik"
   '';
+
+  # https://github.com/msteen/nixos-vsliveshare
+  #imports = [
+  #  "${fetchTarball "https://github.com/msteen/nixos-vsliveshare/tarball/master"}/modules/vsliveshare/home.nix"
+  #];
+  #services.vsliveshare = {
+  #  enable = true;
+  #  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/61cc1f0dc07c2f786e0acfd07444548486f4153b";
+  #};
 
   home.packages = with pkgs; [
     latest.wget
@@ -32,30 +41,44 @@ network = "traefik"
     latest.gcc
     latest.openssl.dev
     latest.patchelf
-    latest.postman
+#    latest.insomnia
+    latest.k6
+    latest.hey
+    latest.ngrok
 
     latest.pavucontrol
+    latest.bluezFull
+    latest.niv
 
+    latest.sakura
     latest.fasd
     latest.ripgrep
     latest.tree
     latest.ncdu
     latest.pv
     latest.jq
+      latest.yq
+      latest.fx
     latest.whois
     latest.gnumake
     latest.file
     latest.bc
-    latest.sc-im
+    latest.ts
+    latest.mcfly
+    latest.fzf
+    latest.bat
+      latest.bat-extras.prettybat
+    latest.delta
 
     latest.atool
     latest.unzip
     latest.zip
-    latest.p7zip
 
     latest.pass
     latest.lastpass-cli
     latest.bitwarden-cli
+    latest._1password
+    latest._1password-gui
     latest.yubico-pam
     latest.yubikey-manager
     latest.pam_u2f
@@ -64,48 +87,63 @@ network = "traefik"
     latest.feh
     latest.pcmanfm
     latest.udiskie
+    latest.tldr
 
-    latest.gitAndTools.gitflow
     latest.gitAndTools.tig
-    latest.gnome3.meld
+    latest.sublime-merge
+    latest.meld
 
-    firefox
+    latest.firefox
     latest.google-chrome-beta
+      latest.epiphany
     latest.thunderbird
-    latest.rambox
     latest.slack
     latest.signal-desktop
-    latest.mumble
     latest.zoom-us
     latest.libreoffice
     latest.freemind
     latest.filezilla
-    latest.shutter
+    latest.vokoscreen
+    latest.ffmpeg
+    #latest.shutter
+    latest.flameshot
     latest.gimp
+    latest.inkscape
     latest.copyq
     latest.wireshark
+    latest.gcalcli
 
-    latest.google-play-music-desktop-player
+    latest.spotify
     latest.vlc
+    latest.audacity
+    latest.obs-studio
+    latest.shotcut
 
     latest.jetbrains-mono
     latest.vscode
-    jetbrains.phpstorm
-    latest.zeal
-    latest.apache-directory-studio
 
     unclutter-xfixes
     latest.playerctl latest.numlockx
 
-    python
-    ruby
-    latest.nodejs-10_x
+    #latest.nodejs-14_x
+    latest.nodejs-16_x
+#    latest.nodejs-17_x
+      latest.cypress
     latest.docker
-    latest.docker_compose
-    latest.php
-    latest.php73Packages.composer
+    latest.docker-compose
+      latest.kube3d
+      latest.kubectl
+      latest.kubernetes-helm
+      latest.stern
 
-    latest.alacritty
+    latest.php
+    latest.php74Packages.composer
+    latest.python
+    latest.mkcert
+    latest.goaccess
+
+    latest.checkbashisms
+    latest.shellcheck
 
     # OcciPrint
     latest.hplipWithPlugin
@@ -113,24 +151,31 @@ network = "traefik"
     # Perso
     latest.nextcloud-client
     latest.rclone
+#    latest.calibre
+    latest.gparted
   ];
 
   # Doc: https://rycee.gitlab.io/home-manager/options.html
 
+#  vscode-with-extensions.override { vscodeExtensions = with vscode-extensions; [ ms-vsliveshare.vsliveshare ]; }
+  programs.vscode = {
+    enable = true;
+    extensions = [ latest.vscode-extensions.ms-vsliveshare.vsliveshare ];
+  };
+
   services.unclutter.enable = true;
-#  services.parcellite.enable = true;
   services.gpg-agent.enable = true;
   services.blueman-applet.enable = true;
 
   programs.home-manager = {
     enable = true;
-    path = https://github.com/rycee/home-manager/archive/release-19.09.tar.gz;
+    path = https://github.com/nix-community/home-manager/archive/master.tar.gz;
   };
 
-  programs.alacritty.settings = {
-    font = {
-      size = 11;
-    };
+  programs.rofi = {
+    enable = true;
+    plugins = [ latest.rofi-calc latest.rofi-emoji ];
+    terminal = "sakura";
   };
 
   # TODO polybar
@@ -150,17 +195,17 @@ network = "traefik"
 
       # see https://rycee.gitlab.io/home-manager/options.html#opt-xsession.windowManager.i3.config.keybindings
       keybindings = pkgs.lib.mkOptionDefault {
-          #"${modifier}+Return" = "exec i3-sensible-terminal";
-          "${modifier}+Return" = "exec alacritty";
+          "${modifier}+Return" = "exec sakura"; #i3-sensible-terminal
 
           ### BÉPO ###
           "${modifier}+b" = "kill";
-          #Alfred "${modifier}+i" = "exec ${pkgs.dmenu}/bin/dmenu_run";
+          "${modifier}+d" = "exec rofi -combi-modi 'window#run#ssh#emoji#calc'  -modi 'calc#combi' -show combi";
           "${modifier}+e" = "fullscreen toggle";
           # change container layout (stacked, tabbed, toggle split)
           "${modifier}+u" = "layout stacking";
           "${modifier}+eacute" = "layout tabbed";
           "${modifier}+p" = "layout toggle split";
+          "${modifier}+Shift+t" = "i3lock --colour=000000";
           # switch to workspace
           "${modifier}+quotedbl" = "workspace 1";
           "${modifier}+guillemotleft" = "workspace 2";
@@ -210,17 +255,18 @@ network = "traefik"
       startup = [
         { command = "nextcloud"; notification = false; }
         { command = "setxkbmap -layout fr -variant bepo"; notification = false; }
-        { command = "alacritty"; notification = false; }
         { command = "udiskie"; notification = false; }
-        #{ command = "parcellite -d"; notification = false; }
-        { command = "albert"; notification = false; }
         { command = "copyq"; notification = false; }
         { command = "numlockx on"; notification = false; } # turn verr num on
 
-        # docker run -d --net traefik --ip 172.10.0.10 --restart always -v $HOME/.config/traefik/traefik.toml:/etc/traefik/traefik.toml -v /var/run/docker.sock:/var/run/docker.sock:ro --name traefik --label traefik.port=8080 traefik
+        # docker run -d --net traefik --ip 172.10.0.10 --restart always -v /var/run/docker.sock:/var/run/docker.sock:ro --name traefik -p 80:80 -p 8080:8080 traefik:2.4.9 --api.insecure=true --providers.docker
         { command = "docker start traefik"; notification = false; }
       ];
     };
+  };
+
+  programs.direnv = {
+    enable = true;
   };
 
   programs.zsh = {
@@ -246,6 +292,9 @@ network = "traefik"
         "pass"
         "ssh-agent"
       ];
+      extraConfig = ''
+        zstyle :omz:plugins:ssh-agent lazy yes
+      '';
     };
 
     # `$` must be escaped with `''` :metal:
@@ -264,16 +313,34 @@ m2wipe() {
   echo "… tchak !"
 }
 
-dip()  { docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"; }
 dcrefresh() {
 	dc stop -t0 $1 && dc rm -vf $1 && dc up -d $1
 }
-    '';
+
+akamai() {
+  # see https://gist.github.com/saml/4758360
+  curl -v -s -H "Pragma: akamai-x-cache-on, akamai-x-cache-remote-on, akamai-x-check-cacheable, akamai-x-get-cache-key, akamai-x-get-extracted-values, akamai-x-get-nonces, akamai-x-get-ssl-client-session-id, akamai-x-get-true-cache-key, akamai-x-ser"  "$1" 2>&1 > /dev/null
+}
+
+unalias v
+
+# see https://github.com/cantino/mcfly
+export MCFLY_FUZZY=true
+eval "$(mcfly init zsh)"
+
+eval "$(op completion zsh)"; compdef _op op
+
+# K8s
+source <(helm completion zsh)
+source <(k3d completion zsh)
+source <(kubectl completion zsh)
+'';
 
     sessionVariables = {
       EDITOR = "vim";
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=7";
-      TERMINAL = "alacritty";
+      TERMINAL = "sakura";
+      PATH = "$PATH:$HOME/.npm/bin";
     };
 
     shellAliases = {
@@ -298,7 +365,10 @@ dcrefresh() {
 
       m = "make";
       t = "task";
-      p = "pass";
+      p = "~/.platformsh/bin/platform";
+      k = "kubectl";
+      flyctl = "~/.fly/bin/flyctl";
+      g = "git";
       tg = "tig --all";
       tgs = "tig status";
       tgl = "tig status";
@@ -334,8 +404,18 @@ dcrefresh() {
     ];
 
     extraConfig = {
+      # see https://github.com/dandavison/delta#get-started
+      core.pager = "delta";
+      interactive.diffFilter = "delta --color-only";
+      delta.navigate = true;
+      merge.conflictstyle = "diff3";
+      diff.colorMoved = "default";
+
       merge.tool = "meld";
       diff.algorithm = "patience";
+      pull.ff = "only";
+      credential.helper = "store";
+      init.defaultBranch = "main";
     };
   };
 

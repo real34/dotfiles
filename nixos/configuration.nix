@@ -27,8 +27,19 @@
   networking.hostName = "pierre"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Gnome is forcing us to use networkManager https://nixos.org/nixos/manual/index.html#sec-networkmanager
+  networking.extraHosts = "
+";
+
 
   hardware.bluetooth.enable = true;
+  # see https://nixos.wiki/wiki/Bluetooth#Enabling_A2DP_Sink
+  hardware.bluetooth.settings = {
+    General = {
+      Enable = "Source,Sink,Media,Socket";
+      MultiProfile = "multiple";
+      AutoEnable = true;
+    };
+  };
 
   hardware.trackpoint.enable = true;
   hardware.trackpoint.emulateWheel = true;
@@ -36,9 +47,7 @@
   hardware.trackpoint.sensitivity = 150;
 
   # Select internationalisation properties.
-  i18n = {
-    consoleKeyMap = "fr-bepo";
-  };
+  console.keyMap = "fr-bepo";
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -48,19 +57,30 @@
   environment.systemPackages = with pkgs; [
     thunderbolt
     wpa_supplicant
-    wpa_supplicant_gui
+    #wpa_supplicant_gui
     gitAndTools.gitFull
     docker
     firefox
     unbound
-    blueman
 
     # Yubikey
     libu2f-host
     yubikey-manager
     yubikey-personalization-gui
     pcsclite
+
+    # Sound
+    blueman
+    pulseaudio-modules-bt
+    bluez-tools
   ];
+
+  nix.settings.auto-optimise-store = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 
   # Specific configuration
   environment.pathsToLink = [ "/share/zsh" ];
@@ -74,32 +94,37 @@
 
   # List services that you want to enable:
   services.nscd.enable = true;
-  services.nixosManual.showManual = true;
   services.tlp.enable = true;
   services.upower.enable = true; # keyboard backlight
-  services.gnome3.at-spi2-core.enable = true; # see https://github.com/NixOS/nixpkgs/pull/49636/files
+  services.gnome.at-spi2-core.enable = true; # see https://github.com/NixOS/nixpkgs/pull/49636/files
+  services.gnome.gnome-keyring.enable = true; # see https://nixos.wiki/wiki/Visual_Studio_Code#Error_after_Sign_On
   services.blueman.enable = true;
 
-  # see https://github.com/NixOS/nixpkgs/blob/2380f6a4faa57c6b91fed26c496e1c8ca5d91982/nixos/modules/services/networking/unbound.nix#L52
-  services.unbound = {
-    enable = true;
-    extraConfig = ''
-cache-max-negative-ttl: 0
-local-zone: "test." redirect
-local-data: "test. 10800 IN NS localhost."
-local-data: "test. 10800 IN SOA test. nobody.invalid. 1 3600 1200 604800 10800"
-local-data: "test. 10800 IN A 172.10.0.10"
-    '';
-  };
+  services.clamav.daemon.enable = true;
+  services.clamav.updater.enable = true;
+
+  # see https://github.com/NixOS/nixpkgs/blob/2380f6a4faa57c6b91fed26c496e1c8ca5d91982/nixos/modules/services/networking/iunbound.nix#L52
+  # services.unbound = {
+  #   enable = true;
+  #   settings = {
+  #     # cache-max-negative-ttl = "0";
+  #     local-zone = "test. redirect";
+  #     local-data = [
+  #       "test. 10800 IN NS localhost."
+  #       "test. 10800 IN SOA test. nobody.invalid. 1 3600 1200 604800 10800"
+  #       "test. 10800 IN A 172.10.0.10"
+  #     ];
+  #   };
+  # };
   virtualisation.docker.enable = true;
 
-  # Disable the firewall altogether.
-  networking.firewall.enable = false;
+  # Doc: https://nixos.org/manual/nixos/stable/index.html#sec-firewall
+  networking.firewall.enable = true;
 
   # Enable CUPS to print documents.
   nixpkgs.config.allowUnfree = true;
   services.printing.enable = true;
-  services.printing.drivers = [ pkgs.hplip pkgs.gutenprint pkgs.cnijfilter_4_00 ];
+  services.printing.drivers = [ pkgs.hplip pkgs.gutenprint pkgs.cnijfilter_4_00 pkgs.cnijfilter2];
 
   # Enable sound.
   sound.enable = true;
@@ -109,7 +134,11 @@ local-data: "test. 10800 IN A 172.10.0.10"
     # NixOS allows either a lightweight build (default) or full build of PulseAudio to be installed.
     # Only the full build has Bluetooth support, so it must be selected here.
     package = pkgs.pulseaudioFull;
-#    extraModules = [ pkgs.pulseaudio-modules-bt ];
+
+    # see https://nixos.wiki/wiki/Bluetooth#Managing_audio_devices
+    extraConfig = "
+      load-module module-switch-on-connect
+    ";
   };
 
   # Enable the X11 windowing system.

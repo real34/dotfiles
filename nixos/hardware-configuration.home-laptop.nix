@@ -22,7 +22,7 @@
     [ { device = "/dev/disk/by-uuid/1d2acd42-9341-41de-9725-b3b5ece30720"; }
     ];
 
-  nix.maxJobs = lib.mkDefault 4;
+  nix.settings.max-jobs = lib.mkDefault 4;
 
   # Conflicts with tlp
   # powerManagement.cpuFreqGovernor = "powersave";
