@@ -42,7 +42,7 @@ network = "traefik"
     latest.gcc
     latest.openssl.dev
     latest.patchelf
-#    latest.insomnia
+    latest.postman
     latest.k6
     latest.hey
     latest.ngrok
