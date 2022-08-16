@@ -46,6 +46,7 @@ network = "traefik"
     latest.k6
     latest.hey
     latest.ngrok
+    latest.openssl
 
     latest.pavucontrol
     latest.bluezFull
@@ -93,6 +94,7 @@ network = "traefik"
     latest.gitAndTools.tig
     latest.sublime-merge
     latest.meld
+    latest.glab
 
     latest.firefox
     latest.google-chrome-beta
@@ -330,6 +332,8 @@ export MCFLY_FUZZY=true
 eval "$(mcfly init zsh)"
 
 eval "$(op completion zsh)"; compdef _op op
+
+eval "$(glab completion -s zsh)"
 
 # K8s
 source <(helm completion zsh)
