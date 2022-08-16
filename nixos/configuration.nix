@@ -71,7 +71,6 @@
 
     # Sound
     blueman
-    pulseaudio-modules-bt
     bluez-tools
   ];
 
@@ -103,19 +102,6 @@
   services.clamav.daemon.enable = true;
   services.clamav.updater.enable = true;
 
-  # see https://github.com/NixOS/nixpkgs/blob/2380f6a4faa57c6b91fed26c496e1c8ca5d91982/nixos/modules/services/networking/iunbound.nix#L52
-  # services.unbound = {
-  #   enable = true;
-  #   settings = {
-  #     # cache-max-negative-ttl = "0";
-  #     local-zone = "test. redirect";
-  #     local-data = [
-  #       "test. 10800 IN NS localhost."
-  #       "test. 10800 IN SOA test. nobody.invalid. 1 3600 1200 604800 10800"
-  #       "test. 10800 IN A 172.10.0.10"
-  #     ];
-  #   };
-  # };
   virtualisation.docker.enable = true;
 
   # Doc: https://nixos.org/manual/nixos/stable/index.html#sec-firewall
@@ -124,7 +110,10 @@
   # Enable CUPS to print documents.
   nixpkgs.config.allowUnfree = true;
   services.printing.enable = true;
-  services.printing.drivers = [ pkgs.hplip pkgs.gutenprint pkgs.cnijfilter_4_00 pkgs.cnijfilter2];
+  services.printing.drivers = [
+    pkgs.hplip
+    pkgs.gutenprint
+  ];
 
   # Enable sound.
   sound.enable = true;

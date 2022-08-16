@@ -25,15 +25,6 @@ watch = true
 network = "traefik"
   '';
 
-  # https://github.com/msteen/nixos-vsliveshare
-  #imports = [
-  #  "${fetchTarball "https://github.com/msteen/nixos-vsliveshare/tarball/master"}/modules/vsliveshare/home.nix"
-  #];
-  #services.vsliveshare = {
-  #  enable = true;
-  #  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/61cc1f0dc07c2f786e0acfd07444548486f4153b";
-  #};
-
   home.packages = with pkgs; [
     latest.wget
     latest.curl
@@ -108,10 +99,8 @@ network = "traefik"
     latest.filezilla
     latest.vokoscreen
     latest.ffmpeg
-    #latest.shutter
     latest.flameshot
     latest.gimp
-    latest.inkscape
     latest.copyq
     latest.wireshark
     latest.gcalcli
@@ -128,9 +117,7 @@ network = "traefik"
     unclutter-xfixes
     latest.playerctl latest.numlockx
 
-    #latest.nodejs-14_x
     latest.nodejs-16_x
-#    latest.nodejs-17_x
       latest.cypress
     latest.docker
     latest.docker-compose
@@ -148,9 +135,6 @@ network = "traefik"
     latest.checkbashisms
     latest.shellcheck
 
-    # OcciPrint
-    latest.hplipWithPlugin
-
     # Perso
     latest.nextcloud-client
     latest.rclone
@@ -158,12 +142,9 @@ network = "traefik"
     latest.gparted
   ];
 
-  # Doc: https://rycee.gitlab.io/home-manager/options.html
-
-#  vscode-with-extensions.override { vscodeExtensions = with vscode-extensions; [ ms-vsliveshare.vsliveshare ]; }
   programs.vscode = {
     enable = true;
-    extensions = [ latest.vscode-extensions.ms-vsliveshare.vsliveshare ];
+    extensions = [];
   };
 
   services.unclutter.enable = true;
@@ -181,7 +162,6 @@ network = "traefik"
     terminal = "sakura";
   };
 
-  # TODO polybar
   xsession.windowManager.i3 = let
     modifier = "Mod4";
   in {
@@ -268,10 +248,6 @@ network = "traefik"
     };
   };
 
-  programs.direnv = {
-    enable = true;
-  };
-
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -289,7 +265,6 @@ network = "traefik"
         "docker"
         "fasd"
         "git"
-        "git-flow"
         "httpie"
         "last-working-dir"
         "pass"
@@ -439,12 +414,5 @@ source <(kubectl completion zsh)
         "notify-i3" = "${pkgs.i3}/bin/i3-msg restart";
       };
     };
-
-    #TODO profiles
   };
 }
-
-# TODO
-#
-# - setup GPG for Git, mails etc...
-# - try fzf?
