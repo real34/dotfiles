@@ -127,7 +127,7 @@ network = "traefik"
       latest.stern
 
     latest.php
-    latest.php74Packages.composer
+    latest.php81Packages.composer
     latest.python
     latest.mkcert
     latest.goaccess
