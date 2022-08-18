@@ -397,6 +397,10 @@ source <(kubectl completion zsh)
       pull.ff = "only";
       credential.helper = "store";
       init.defaultBranch = "main";
+
+      # see https://betterprogramming.pub/8-advanced-git-commands-university-wont-teach-you-fe63b483d34b
+      help.autocorrect = 1;
+      fetch.prune = true;
     };
   };
 
