@@ -348,6 +348,7 @@ source <(kubectl completion zsh)
       p = "~/.platformsh/bin/platform";
       k = "kubectl --context build";
       kp = "kubectl --context prod.eu1";
+      kp2 = "kubectl --context prod-eu2";
       flyctl = "~/.fly/bin/flyctl";
       g = "git";
       tg = "tig --all";
