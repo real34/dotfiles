@@ -401,6 +401,7 @@ source <(kubectl completion zsh)
       # see https://betterprogramming.pub/8-advanced-git-commands-university-wont-teach-you-fe63b483d34b
       help.autocorrect = 1;
       fetch.prune = true;
+      push.autoSetupRemote = true;
     };
   };
 
