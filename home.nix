@@ -41,7 +41,6 @@ network = "traefik"
 
     latest.pavucontrol
     latest.bluezFull
-    latest.niv
 
     latest.sakura
     latest.fasd
@@ -338,7 +337,6 @@ source <(kubectl completion zsh)
       dcr = "docker-compose run --rm";
       dcrm = "docker-compose rm -fsv";
       copy = "xclip -selection c";
-      deploy = "docker run -it --rm -v ~/.ssh:/root/.ssh -v $SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent -v $(pwd):/source neolao/capistrano:3.4.0 bash";
 
       bepo = "setxkbmap -layout fr -variant bepo";
       fr = "setxkbmap -layout fr -variant oss";
@@ -353,12 +351,6 @@ source <(kubectl completion zsh)
       g = "git";
       tg = "tig --all";
       tgs = "tig status";
-      tgl = "tig status";
-      tgb = "tig blame -C";
-
-      # for some reasons `light -k -S 100` does not work for me… TODO find why, and uninstall upower
-      klon = "dbus-send --system --type=method_call  --dest=\"org.freedesktop.UPower\" \"/org/freedesktop/UPower/KbdBacklight\" \"org.freedesktop.UPower.KbdBacklight.SetBrightness\" int32:100";
-      kloff = "light -k -S 0";
     };
   };
 
