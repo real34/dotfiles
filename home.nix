@@ -4,7 +4,7 @@ let
   latest = import <nixpkgs>{};
 in
 {
-  home.stateVersion = "18.09";
+  home.stateVersion = "22.05";
   home.file.".config/traefik/traefik.toml".text = ''
 logLevel = "INFO"
 defaultEntryPoints = ["http", "https"]
