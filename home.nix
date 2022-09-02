@@ -150,11 +150,6 @@ network = "traefik"
   services.gpg-agent.enable = true;
   services.blueman-applet.enable = true;
 
-  programs.home-manager = {
-    enable = true;
-    path = https://github.com/nix-community/home-manager/archive/master.tar.gz;
-  };
-
   programs.rofi = {
     enable = true;
     plugins = [ latest.rofi-calc latest.rofi-emoji ];
