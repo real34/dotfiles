@@ -5,25 +5,9 @@ let
 in
 {
   home.stateVersion = "22.05";
-  home.file.".config/traefik/traefik.toml".text = ''
-logLevel = "INFO"
-defaultEntryPoints = ["http", "https"]
 
-[web]
-address = ":8080"
-
-# [entryPoints]
-#   [entryPoints.http]
-#   address = ":80"
-#   [entryPoints.https]
-#   address = ":443"
-#     [entryPoints.https.tls]
-
-[docker]
-domain = "test"
-watch = true
-network = "traefik"
-  '';
+  home.file.".i3status.conf".source = ./files/.i3status.conf;
+  home.file.".config/traefik/traefik.toml".source = ./files/traefik.toml;
 
   home.packages = with pkgs; [
     latest.wget
