@@ -30,8 +30,9 @@
   # Enable thermal data
   services.thermald.enable = true;
 
-  # TODO Enable fingerprint support
-  # services.fprintd.enable = true;
+  # Enable fingerprint support
+  # see https://wiki.archlinux.org/title/fprint for usage
+  services.fprintd.enable = true;
 
   # Display things like a boss
   ## Make it work

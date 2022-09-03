@@ -58,6 +58,7 @@ in
     latest.yubico-pam
     latest.yubikey-manager
     latest.pam_u2f
+    latest.polkit_gnome # fun fact: https://gitlab.gnome.org/GNOME/gdm/-/issues/613
 
     latest.arandr
     latest.feh
