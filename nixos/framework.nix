@@ -33,8 +33,8 @@
   # TODO Enable fingerprint support
   # services.fprintd.enable = true;
 
-  # Display thins like a boss
-  hardware.video.hidpi.enable = lib.mkDefault true; # https://github.com/kvark/dotfiles/blob/master/nix/hardware-configuration.nix#L41
+  # Display things like a boss
+  ## Make it work
   hardware.opengl.enable = true;
   hardware.opengl.extraPackages = with pkgs; [
     mesa_drivers
@@ -43,6 +43,15 @@
     libvdpau-va-gl
     intel-media-driver
   ];
+  ## Make it nice (https://nixos.wiki/wiki/Xorg && https://wiki.archlinux.org/title/Framework_Laptop#HiDPI_settings)
+  # https://github.com/kvark/dotfiles/blob/master/nix/hardware-configuration.nix#L41
+  hardware.video.hidpi.enable = lib.mkDefault true;
+  services.xserver.dpi = 130;
+  environment.variables = {
+    GDK_SCALE = "1.5";
+    GDK_DPI_SCALE = "0.77"; # 1/1.3
+    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1.5";
+  };
 
   # Bring in some audio
   security.rtkit.enable = true; # rtkit is optional but recommended
