@@ -14,29 +14,17 @@
       ./programs/zsh.nix
     ];
 
+  programs.htop.enable = true;
+  programs.vim.enable = true;
   programs.vscode = {
     enable = true;
     extensions = [ ];
   };
-
-  services.unclutter.enable = true;
-  services.gpg-agent.enable = true;
-  services.blueman-applet.enable = true;
-
   programs.rofi = {
     enable = true;
     plugins = [ pkgs.rofi-calc pkgs.rofi-emoji ];
     terminal = "sakura";
   };
-
-  programs.htop = {
-    enable = true;
-  };
-
-  programs.vim = {
-    enable = true;
-  };
-
   programs.autorandr = {
     enable = true;
     hooks = {
@@ -45,4 +33,8 @@
       };
     };
   };
+
+  services.unclutter.enable = true;
+  services.gpg-agent.enable = true;
+  services.blueman-applet.enable = true;
 }
