@@ -23,6 +23,7 @@ in
     latest.ngrok
     latest.openssl
 
+    latest.pulseaudioFull
     latest.pavucontrol
     latest.bluezFull
 
