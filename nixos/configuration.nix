@@ -61,8 +61,6 @@
         enable = true;
       };
     };
-
-    # videoDrivers = [ "intel" "nvidia" ];
   };
 
   # Configure console keymap

@@ -15,17 +15,8 @@
     "module_blacklist=hid_sensor_hub" # brightness keys. See https://dov.dev/blog/nixos-on-the-framework-12th-gen
   ];
 
-  # TODO Understand why it is needed and uncomment it!
-  # boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_latest.override {
-  #   argsOverride = rec {
-  #     src = pkgs.fetchurl {
-  #       url = "mirror://kernel/linux/kernel/v5.x/linux-${version}.tar.xz";
-  #       sha256 = "1j0lnrsj5y2bsmmym8pjc5wk4wb11y336zr9gad1nmxcr0rwvz9j";
-  #     };
-  #     version = "5.15.1";
-  #     modDirVersion = "5.15.1";
-  #   };
-  # });
+  # Use latest kernel version because on 5.15 screen is not detected properly (and external monitor doesn't work either)
+  boot.kernelPackages = pkgs.linuxPackages_5_18; # see https://github.com/NixOS/nixpkgs/issues/183955#issuecomment-1210468614
 
   powerManagement = {
     enable = true;
@@ -42,10 +33,7 @@
   # TODO Enable fingerprint support
   # services.fprintd.enable = true;
 
-  # TODO make second screen work!! ¯\_(ツ)_/¯
-  # $ nix-shell -p glxinfo --run glxinfo | egrep "OpenGL vendor|OpenGL renderer"
-  # OpenGL vendor string: Mesa/X.org
-  # OpenGL renderer string: llvmpipe (LLVM 13.0.1, 256 bits)
+  # Display thins like a boss
   hardware.video.hidpi.enable = lib.mkDefault true; # https://github.com/kvark/dotfiles/blob/master/nix/hardware-configuration.nix#L41
   hardware.opengl.enable = true;
   hardware.opengl.extraPackages = with pkgs; [
