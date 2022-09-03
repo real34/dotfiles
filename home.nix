@@ -4,26 +4,10 @@ let
   latest = import <nixpkgs>{};
 in
 {
-  home.stateVersion = "18.09";
-  home.file.".config/traefik/traefik.toml".text = ''
-logLevel = "INFO"
-defaultEntryPoints = ["http", "https"]
+  home.stateVersion = "22.05";
 
-[web]
-address = ":8080"
-
-# [entryPoints]
-#   [entryPoints.http]
-#   address = ":80"
-#   [entryPoints.https]
-#   address = ":443"
-#     [entryPoints.https.tls]
-
-[docker]
-domain = "test"
-watch = true
-network = "traefik"
-  '';
+  home.file.".i3status.conf".source = ./files/.i3status.conf;
+  home.file.".config/traefik/traefik.toml".source = ./files/traefik.toml;
 
   home.packages = with pkgs; [
     latest.wget
@@ -39,9 +23,9 @@ network = "traefik"
     latest.ngrok
     latest.openssl
 
+    latest.pulseaudioFull
     latest.pavucontrol
     latest.bluezFull
-    latest.niv
 
     latest.sakura
     latest.fasd
@@ -75,6 +59,7 @@ network = "traefik"
     latest.yubico-pam
     latest.yubikey-manager
     latest.pam_u2f
+    latest.polkit_gnome # fun fact: https://gitlab.gnome.org/GNOME/gdm/-/issues/613
 
     latest.arandr
     latest.feh
@@ -150,11 +135,6 @@ network = "traefik"
   services.unclutter.enable = true;
   services.gpg-agent.enable = true;
   services.blueman-applet.enable = true;
-
-  programs.home-manager = {
-    enable = true;
-    path = https://github.com/nix-community/home-manager/archive/master.tar.gz;
-  };
 
   programs.rofi = {
     enable = true;
@@ -241,6 +221,9 @@ network = "traefik"
         { command = "udiskie"; notification = false; }
         { command = "copyq"; notification = false; }
         { command = "numlockx on"; notification = false; } # turn verr num on
+
+        { command = "autorandr -c"; notification = false; }
+        { command = "feh --bg-scale /home/pierre/Documents/Graphisme/fc-bg-light-black.png"; notification = false; }
 
         # docker run -d --net traefik --ip 172.10.0.10 --restart always -v /var/run/docker.sock:/var/run/docker.sock:ro --name traefik -p 80:80 -p 8080:8080 traefik:2.4.9 --api.insecure=true --providers.docker
         { command = "docker start traefik"; notification = false; }
@@ -338,7 +321,6 @@ source <(kubectl completion zsh)
       dcr = "docker-compose run --rm";
       dcrm = "docker-compose rm -fsv";
       copy = "xclip -selection c";
-      deploy = "docker run -it --rm -v ~/.ssh:/root/.ssh -v $SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent -v $(pwd):/source neolao/capistrano:3.4.0 bash";
 
       bepo = "setxkbmap -layout fr -variant bepo";
       fr = "setxkbmap -layout fr -variant oss";
@@ -353,12 +335,6 @@ source <(kubectl completion zsh)
       g = "git";
       tg = "tig --all";
       tgs = "tig status";
-      tgl = "tig status";
-      tgb = "tig blame -C";
-
-      # for some reasons `light -k -S 100` does not work for me… TODO find why, and uninstall upower
-      klon = "dbus-send --system --type=method_call  --dest=\"org.freedesktop.UPower\" \"/org/freedesktop/UPower/KbdBacklight\" \"org.freedesktop.UPower.KbdBacklight.SetBrightness\" int32:100";
-      kloff = "light -k -S 0";
     };
   };
 
