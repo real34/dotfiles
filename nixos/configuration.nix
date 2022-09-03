@@ -76,9 +76,6 @@
   };
   home-manager.users.pierre = import /home/pierre/dotfiles/home.nix;
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [

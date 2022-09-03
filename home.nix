@@ -1,10 +1,23 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   home.stateVersion = "22.05";
 
   home.file.".i3status.conf".source = ./files/.i3status.conf;
   home.file.".config/traefik/traefik.toml".source = ./files/traefik.toml;
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "1password" "1password-cli"
+
+    "ngrok"
+    "postman"
+    "vscode"
+
+    "google-chrome-beta"
+    "slack"
+    "spotify" "spotify-unwrapped"
+    "zoom"
+  ];
 
   home.packages = with pkgs; [
     wget
