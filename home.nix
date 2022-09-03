@@ -1,8 +1,5 @@
 { pkgs, ... }:
 
-let
-  latest = import <nixpkgs>{};
-in
 {
   home.stateVersion = "22.05";
 
@@ -10,121 +7,120 @@ in
   home.file.".config/traefik/traefik.toml".source = ./files/traefik.toml;
 
   home.packages = with pkgs; [
-    latest.wget
-    latest.curl
-    latest.httpie
-    latest.bind
-    latest.gcc
-    latest.openssl.dev
-    latest.patchelf
-    latest.postman
-    latest.k6
-    latest.hey
-    latest.ngrok
-    latest.openssl
+    wget
+    curl
+    httpie
+    bind
+    gcc
+    openssl.dev
+    patchelf
+    postman
+    k6
+    hey
+    ngrok
+    openssl
 
-    latest.pulseaudioFull
-    latest.pavucontrol
-    latest.bluezFull
+    pulseaudioFull
+    pavucontrol
+    bluezFull
 
-    latest.sakura
-    latest.fasd
-    latest.ripgrep
-    latest.tree
-    latest.ncdu
-    latest.pv
-    latest.jq
-      latest.yq
-      latest.fx
-    latest.whois
-    latest.gnumake
-    latest.file
-    latest.bc
-    latest.ts
-    latest.mcfly
-    latest.fzf
-    latest.bat
-      latest.bat-extras.prettybat
-    latest.delta
+    sakura
+    fasd
+    ripgrep
+    tree
+    ncdu
+    pv
+    jq
+      yq
+      fx
+    whois
+    gnumake
+    file
+    bc
+    ts
+    mcfly
+    fzf
+    bat
+      bat-extras.prettybat
+    delta
 
-    latest.atool
-    latest.unzip
-    latest.zip
+    atool
+    unzip
+    zip
 
-    latest.pass
-    latest.lastpass-cli
-    latest.bitwarden-cli
-    latest._1password
-    latest._1password-gui
-    latest.yubico-pam
-    latest.yubikey-manager
-    latest.pam_u2f
-    latest.polkit_gnome # fun fact: https://gitlab.gnome.org/GNOME/gdm/-/issues/613
+    pass
+    lastpass-cli
+    bitwarden-cli
+    _1password
+    _1password-gui
+    yubico-pam
+    yubikey-manager
+    pam_u2f
+    polkit_gnome # fun fact: https://gitlab.gnome.org/GNOME/gdm/-/issues/613
 
-    latest.arandr
-    latest.feh
-    latest.pcmanfm
-    latest.udiskie
-    latest.tldr
+    arandr
+    feh
+    pcmanfm
+    udiskie
+    tldr
 
-    latest.gitAndTools.tig
-    latest.sublime-merge
-    latest.meld
-    latest.glab
+    gitAndTools.tig
+    meld
+    glab
 
-    latest.firefox
-    latest.google-chrome-beta
-      latest.epiphany
-    latest.thunderbird
-    latest.slack
-    latest.signal-desktop
-    latest.zoom-us
-    latest.libreoffice
-    latest.freemind
-    latest.filezilla
-    latest.vokoscreen
-    latest.ffmpeg
-    latest.flameshot
-    latest.gimp
-    latest.copyq
-    latest.wireshark
-    latest.gcalcli
+    firefox
+    google-chrome-beta
+      epiphany
+    thunderbird
+    slack
+    signal-desktop
+    zoom-us
+    libreoffice
+    freemind
+    filezilla
+    vokoscreen
+    ffmpeg
+    flameshot
+    gimp
+    copyq
+    wireshark
+    gcalcli
 
-    latest.spotify
-    latest.vlc
-    latest.audacity
-    latest.obs-studio
-    latest.shotcut
+    spotify
+    vlc
+    audacity
+    obs-studio
+    shotcut
 
-    latest.jetbrains-mono
-    latest.vscode
+    jetbrains-mono
+    vscode
 
     unclutter-xfixes
-    latest.playerctl latest.numlockx
+    playerctl numlockx
 
-    latest.nodejs-16_x
-      latest.cypress
-    latest.docker
-    latest.docker-compose
-      latest.kube3d
-      latest.kubectl
-      latest.kubernetes-helm
-      latest.stern
+    nodejs-16_x
+      cypress
+    docker
+    docker-compose
+      kube3d
+      kubectl
+      kubernetes-helm
+      stern
 
-    latest.php
-    latest.php81Packages.composer
-    latest.python
-    latest.mkcert
-    latest.goaccess
+    php
+    php81Packages.composer
+    python
+    mkcert
+    goaccess
 
-    latest.checkbashisms
-    latest.shellcheck
+    checkbashisms
+    shellcheck
 
     # Perso
-    latest.nextcloud-client
-    latest.rclone
-#    latest.calibre
-    latest.gparted
+    nextcloud-client
+    rclone
+#    calibre
+    gparted
   ];
 
   programs.vscode = {
@@ -138,7 +134,7 @@ in
 
   programs.rofi = {
     enable = true;
-    plugins = [ latest.rofi-calc latest.rofi-emoji ];
+    plugins = [ pkgs.rofi-calc pkgs.rofi-emoji ];
     terminal = "sakura";
   };
 
@@ -340,7 +336,7 @@ source <(kubectl completion zsh)
 
   programs.git = {
     enable = true;
-    package = latest.gitAndTools.gitFull;
+    package = pkgs.gitAndTools.gitFull;
 
     userEmail = "pierre@front-commerce.com";
     userName = "Pierre Martin";
