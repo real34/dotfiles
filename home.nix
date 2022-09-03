@@ -13,7 +13,7 @@
 
   programs.vscode = {
     enable = true;
-    extensions = [];
+    extensions = [ ];
   };
 
   services.unclutter.enable = true;
@@ -26,22 +26,24 @@
     terminal = "sakura";
   };
 
-  xsession.windowManager.i3 = let
-    modifier = "Mod4";
-  in {
-    enable = true;
-    config = {
-      assigns = {
-        # https://rycee.gitlab.io/home-manager/options.html#opt-xsession.windowManager.i3.config.assigns
-      };
-      focus = {
-        mouseWarping = false; # Whether mouse cursor should be warped to the center of the window when switching focus to a window on a different output.
-      };
+  xsession.windowManager.i3 =
+    let
+      modifier = "Mod4";
+    in
+    {
+      enable = true;
+      config = {
+        assigns = {
+          # https://rycee.gitlab.io/home-manager/options.html#opt-xsession.windowManager.i3.config.assigns
+        };
+        focus = {
+          mouseWarping = false; # Whether mouse cursor should be warped to the center of the window when switching focus to a window on a different output.
+        };
 
-      modifier = modifier;
+        modifier = modifier;
 
-      # see https://rycee.gitlab.io/home-manager/options.html#opt-xsession.windowManager.i3.config.keybindings
-      keybindings = pkgs.lib.mkOptionDefault {
+        # see https://rycee.gitlab.io/home-manager/options.html#opt-xsession.windowManager.i3.config.keybindings
+        keybindings = pkgs.lib.mkOptionDefault {
           "${modifier}+Return" = "exec sakura"; #i3-sensible-terminal
 
           ### BÉPO ###
@@ -99,21 +101,21 @@
           "XF86MonBrightnessDown" = "exec light -U 2"; # decrease screen brightness
         };
 
-      startup = [
-        { command = "nextcloud"; notification = false; }
-        { command = "setxkbmap -layout fr -variant bepo"; notification = false; }
-        { command = "udiskie"; notification = false; }
-        { command = "copyq"; notification = false; }
-        { command = "numlockx on"; notification = false; } # turn verr num on
+        startup = [
+          { command = "nextcloud"; notification = false; }
+          { command = "setxkbmap -layout fr -variant bepo"; notification = false; }
+          { command = "udiskie"; notification = false; }
+          { command = "copyq"; notification = false; }
+          { command = "numlockx on"; notification = false; } # turn verr num on
 
-        { command = "autorandr -c"; notification = false; }
-        { command = "feh --bg-scale /home/pierre/Documents/Graphisme/fc-bg-light-black.png"; notification = false; }
+          { command = "autorandr -c"; notification = false; }
+          { command = "feh --bg-scale /home/pierre/Documents/Graphisme/fc-bg-light-black.png"; notification = false; }
 
-        # docker run -d --net traefik --ip 172.10.0.10 --restart always -v /var/run/docker.sock:/var/run/docker.sock:ro --name traefik -p 80:80 -p 8080:8080 traefik:2.4.9 --api.insecure=true --providers.docker
-        { command = "docker start traefik"; notification = false; }
-      ];
+          # docker run -d --net traefik --ip 172.10.0.10 --restart always -v /var/run/docker.sock:/var/run/docker.sock:ro --name traefik -p 80:80 -p 8080:8080 traefik:2.4.9 --api.insecure=true --providers.docker
+          { command = "docker start traefik"; notification = false; }
+        ];
+      };
     };
-  };
 
   programs.zsh = {
     enable = true;
@@ -145,43 +147,43 @@
     # `$` must be escaped with `''` :metal:
     # source: https://nixos.org/nix-dev/2015-December/019018.html
     initExtra = ''
-      bindkey ' ' forward-word
-      zstyle ':completion:*:hosts' hosts ''${=''${''${''${''${(@M)''${(f)"''$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
-      setopt PROMPT_CR
-      setopt PROMPT_SP
+            bindkey ' ' forward-word
+            zstyle ':completion:*:hosts' hosts ''${=''${''${''${''${(@M)''${(f)"''$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
+            setopt PROMPT_CR
+            setopt PROMPT_SP
 
-m2wipe() {
-  echo "Pouf pouf pouf…"
-  sudo rm -rf $1/generated $1/var/cache/**/* $1/pub/static/* $1/var/page_cache $1/var/view_preprocessed
-  mkdir $1/generated
-  sudo chmod -R 777 $1/{var,pub,generated,app/etc}
-  echo "… tchak !"
-}
+      m2wipe() {
+        echo "Pouf pouf pouf…"
+        sudo rm -rf $1/generated $1/var/cache/**/* $1/pub/static/* $1/var/page_cache $1/var/view_preprocessed
+        mkdir $1/generated
+        sudo chmod -R 777 $1/{var,pub,generated,app/etc}
+        echo "… tchak !"
+      }
 
-dcrefresh() {
-	dc stop -t0 $1 && dc rm -vf $1 && dc up -d $1
-}
+      dcrefresh() {
+      	dc stop -t0 $1 && dc rm -vf $1 && dc up -d $1
+      }
 
-akamai() {
-  # see https://gist.github.com/saml/4758360
-  curl -v -s -H "Pragma: akamai-x-cache-on, akamai-x-cache-remote-on, akamai-x-check-cacheable, akamai-x-get-cache-key, akamai-x-get-extracted-values, akamai-x-get-nonces, akamai-x-get-ssl-client-session-id, akamai-x-get-true-cache-key, akamai-x-ser"  "$1" 2>&1 > /dev/null
-}
+      akamai() {
+        # see https://gist.github.com/saml/4758360
+        curl -v -s -H "Pragma: akamai-x-cache-on, akamai-x-cache-remote-on, akamai-x-check-cacheable, akamai-x-get-cache-key, akamai-x-get-extracted-values, akamai-x-get-nonces, akamai-x-get-ssl-client-session-id, akamai-x-get-true-cache-key, akamai-x-ser"  "$1" 2>&1 > /dev/null
+      }
 
-unalias v
+      unalias v
 
-# see https://github.com/cantino/mcfly
-export MCFLY_FUZZY=true
-eval "$(mcfly init zsh)"
+      # see https://github.com/cantino/mcfly
+      export MCFLY_FUZZY=true
+      eval "$(mcfly init zsh)"
 
-eval "$(op completion zsh)"; compdef _op op
+      eval "$(op completion zsh)"; compdef _op op
 
-eval "$(glab completion -s zsh)"
+      eval "$(glab completion -s zsh)"
 
-# K8s
-source <(helm completion zsh)
-source <(k3d completion zsh)
-source <(kubectl completion zsh)
-'';
+      # K8s
+      source <(helm completion zsh)
+      source <(k3d completion zsh)
+      source <(kubectl completion zsh)
+    '';
 
     sessionVariables = {
       EDITOR = "vim";
@@ -191,14 +193,14 @@ source <(kubectl completion zsh)
     };
 
     shellAliases = {
-      a = "fasd -a";        # any
-      s = "fasd -si";       # show / search / select
-      d = "fasd -d";        # directory
-      f = "fasd -f";        # file
-      sd = "fasd -sid";     # interactive directory selection
-      sf = "fasd -sif";     # interactive file selection
-      z = "fasd_cd -d";     # cd, same functionality as j in autojump
-      j = "fasd_cd -d";     # cd, same functionality as j in autojump
+      a = "fasd -a"; # any
+      s = "fasd -si"; # show / search / select
+      d = "fasd -d"; # directory
+      f = "fasd -f"; # file
+      sd = "fasd -sid"; # interactive directory selection
+      sf = "fasd -sif"; # interactive file selection
+      z = "fasd_cd -d"; # cd, same functionality as j in autojump
+      j = "fasd_cd -d"; # cd, same functionality as j in autojump
       zz = "fasd_cd -d -i"; # cd with interactive selection
 
       dc = "docker-compose";

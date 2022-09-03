@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./framework.nix
       <home-manager/nixos>
@@ -70,9 +71,9 @@
   users.users.pierre = {
     isNormalUser = true;
     description = "Pierre";
-    extraGroups = [ "networkmanager" "wheel" "audio" "docker" "video"  ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "docker" "video" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
   home-manager.users.pierre = import /home/pierre/dotfiles/home.nix;
 

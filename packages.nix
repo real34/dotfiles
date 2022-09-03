@@ -109,6 +109,7 @@
     playerctl
     numlockx
 
+    nixpkgs-fmt
     nodejs-16_x
     cypress
     docker
