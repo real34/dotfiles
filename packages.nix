@@ -123,6 +123,7 @@
     php
     php81Packages.composer
     python
+      python3
     mkcert
     goaccess
 
