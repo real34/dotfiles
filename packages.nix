@@ -75,6 +75,7 @@
     tldr
 
     gitAndTools.tig
+    git-filter-repo
     meld
     glab
 
