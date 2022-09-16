@@ -43,6 +43,9 @@
       help.autocorrect = 1;
       fetch.prune = true;
       push.autoSetupRemote = true;
+
+      # see https://michaelheap.com/git-ignore-rev/
+      blame.ignoreRevsFile = ".git-blame-ignore-revs";
     };
   };
 }
