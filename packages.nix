@@ -32,7 +32,7 @@
 
     pulseaudioFull
     pavucontrol
-    bluezFull
+    bluez # was bluezFull before 27th september 2022
 
     sakura
     fasd
@@ -123,7 +123,7 @@
     php
     php81Packages.composer
     python
-      python3
+    python3
     mkcert
     goaccess
 

@@ -16,7 +16,7 @@
   ];
 
   # Use latest kernel version because on 5.15 screen is not detected properly (and external monitor doesn't work either)
-  boot.kernelPackages = pkgs.linuxPackages_5_18; # see https://github.com/NixOS/nixpkgs/issues/183955#issuecomment-1210468614
+  boot.kernelPackages = pkgs.linuxPackages_5_19; # see https://github.com/NixOS/nixpkgs/issues/183955#issuecomment-1210468614
 
   powerManagement = {
     enable = true;
@@ -38,7 +38,7 @@
   ## Make it work
   hardware.opengl.enable = true;
   hardware.opengl.extraPackages = with pkgs; [
-    mesa_drivers
+    mesa.drivers # was mesa_drivers before 27th september 2022
     vaapiIntel
     vaapiVdpau
     libvdpau-va-gl
