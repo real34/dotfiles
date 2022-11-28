@@ -13,14 +13,25 @@
     "mem_sleep_default=deep"
     "nvme.noacpi=1" # power consumption. See https://github.com/NixOS/nixos-hardware/blob/12620020f76b1b5d2b0e6fbbda831ed4f5fe56e1/framework/default.nix#L12
     "module_blacklist=hid_sensor_hub" # brightness keys. See https://dov.dev/blog/nixos-on-the-framework-12th-gen
+    "i915.enable_psr=0" # https://community.frame.work/t/periodic-stuttering-on-fresh-gnome-40-wayland-install-on-arch-linux/3912/6
+    "layout=bls" # Read $KERNEL_INSTALL_LAYOUT from /etc/machine-info. Please move it to the layout= setting of /etc/kernel/install.conf.
   ];
 
   # Use latest kernel version because on 5.15 screen is not detected properly (and external monitor doesn't work either)
-  boot.kernelPackages = pkgs.linuxPackages_5_19; # see https://github.com/NixOS/nixpkgs/issues/183955#issuecomment-1210468614
+  boot.kernelPackages = pkgs.linuxPackages_6_0; # see https://github.com/NixOS/nixpkgs/issues/183955#issuecomment-1210468614
+
+  # prevent "/boot/efi No space left on device" errors - see https://github.com/NixOS/nixpkgs/issues/23926
+  boot.loader.grub.configurationLimit = 10;
 
   powerManagement = {
     enable = true;
-    powertop.enable = true;
+
+    # TODO tweak it a bit better? https://github.com/fenrus75/powertopw
+    # Alternative https://github.com/ebzzry/dotfiles/blob/main/nixos/configuration.nix#L365
+    # Deactivated to try to disable USB autosuspend.
+    # See https://community.frame.work/t/bluetooth-mouse-lag/12933 or https://community.frame.work/t/bluetooth-keyboard-delay/6387
+    powertop.enable = false;
+
     # TODO Not sure what it does: the default detection uses "powersave"
     # cpuFreqGovernor = lib.mkDefault "ondemand";
   };
