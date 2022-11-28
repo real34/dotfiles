@@ -83,6 +83,7 @@
     google-chrome-beta
     epiphany
     thunderbird
+    ferdium
     slack
     signal-desktop
     zoom-us
@@ -90,6 +91,7 @@
     freemind
     filezilla
     vokoscreen
+    asciinema
     ffmpeg
     flameshot
     gimp
@@ -105,6 +107,7 @@
 
     jetbrains-mono
     vscode
+    zettlr
 
     unclutter-xfixes
     playerctl
