@@ -20,6 +20,7 @@
     wget
     curl
     httpie
+    hurl
     bind
     gcc
     openssl.dev
