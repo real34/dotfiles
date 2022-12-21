@@ -79,6 +79,7 @@
     git-filter-repo
     meld
     glab
+    sapling
 
     firefox
     google-chrome-beta
