@@ -19,7 +19,7 @@
   home.packages = with pkgs; [
     wget
     curl
-    httpie
+    #httpie # TMP: broken (2022-12-19) - see https://github.com/NixOS/nixpkgs/pull/207035
     hurl
     bind
     gcc
