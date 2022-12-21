@@ -109,7 +109,7 @@
 
     jetbrains-mono
     vscode
-    zettlr
+    zettlr # TMP: broken (2022-12-19) - patched with clisp overlay
 
     unclutter-xfixes
     playerctl
