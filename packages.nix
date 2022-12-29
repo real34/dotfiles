@@ -8,6 +8,7 @@
     "ngrok"
     "postman"
     "vscode"
+    "code"
 
     "google-chrome-beta"
     "slack"
@@ -108,7 +109,7 @@
     shotcut
 
     jetbrains-mono
-    vscode
+    vscode.fhs
     zettlr # TMP: broken (2022-12-19) - patched with clisp overlay
 
     unclutter-xfixes
