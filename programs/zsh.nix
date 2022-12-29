@@ -96,11 +96,9 @@
 
       m = "make";
       t = "task";
-      p = "~/.platformsh/bin/platform";
       k = "kubectl --context build";
       kp = "kubectl --context prod-eu2";
       kp2 = "kubectl --context prod-eu2"; # deprecated
-      flyctl = "~/.fly/bin/flyctl";
       k9sp = "k9s --context prod-eu2";
       g = "git";
       tg = "tig --all";
