@@ -124,6 +124,7 @@
     kubectl
     kubernetes-helm
     stern
+    k9s
 
     php
     php81Packages.composer

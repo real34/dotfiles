@@ -65,6 +65,7 @@
       source <(helm completion zsh)
       source <(k3d completion zsh)
       source <(kubectl completion zsh)
+      source <(k9s completion zsh); compdef _k9s k9s
     '';
 
     sessionVariables = {
@@ -100,6 +101,7 @@
       kp = "kubectl --context prod-eu2";
       kp2 = "kubectl --context prod-eu2"; # deprecated
       flyctl = "~/.fly/bin/flyctl";
+      k9sp = "k9s --context prod-eu2";
       g = "git";
       tg = "tig --all";
       tgs = "tig status";
