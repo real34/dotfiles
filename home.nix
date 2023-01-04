@@ -4,15 +4,7 @@
   home.stateVersion = "22.05";
 
   # Temporary overlays for patches
-  nixpkgs.overlays = [
-    (self: super: {
-      # see https://github.com/NixOS/nixpkgs/pull/206745
-      clisp = super.clisp.override
-        {
-          readline = pkgs.readline6;
-        };
-    })
-  ];
+  nixpkgs.overlays = [];
 
   home.file.".config/traefik/traefik.toml".source = ./files/traefik.toml;
   home.file.".npmrc".source = ./files/.npmrc;

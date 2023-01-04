@@ -20,7 +20,7 @@
   home.packages = with pkgs; [
     wget
     curl
-    #httpie # TMP: broken (2022-12-19) - see https://github.com/NixOS/nixpkgs/pull/207035
+    httpie
     hurl
     bind
     gcc
@@ -110,7 +110,7 @@
 
     jetbrains-mono
     vscode.fhs
-    zettlr # TMP: broken (2022-12-19) - patched with clisp overlay
+    zettlr
 
     unclutter-xfixes
     playerctl
