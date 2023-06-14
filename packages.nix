@@ -10,6 +10,7 @@
     "vscode"
     "code"
 
+    "vivaldi"
     "google-chrome-beta"
     "slack"
     "spotify"
@@ -83,8 +84,11 @@
     sapling
 
     firefox
+    vivaldi
     google-chrome-beta
     epiphany
+    offpunk
+    lagrange
     thunderbird
     ferdium
     slack
