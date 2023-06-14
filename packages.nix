@@ -56,7 +56,6 @@
     fzf
     bat
     bat-extras.prettybat
-    delta
 
     atool
     unzip
@@ -78,7 +77,6 @@
     udiskie
     tldr
 
-    gitAndTools.tig
     git-filter-repo
     meld
     glab

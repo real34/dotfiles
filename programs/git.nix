@@ -1,10 +1,12 @@
 { pkgs, ... }:
 
 {
+  programs.gitui.enable = true;
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
 
+    # TODO: https://www.imagile.fr/utiliser-automatiquement-plusieurs-identites-sur-git/
     userEmail = "pierre@front-commerce.com";
     userName = "Pierre Martin";
 
@@ -25,11 +27,9 @@
       ".vscode"
     ];
 
+    # see https://github.com/dandavison/delta#get-started
+    delta.enable = true;
     extraConfig = {
-      # see https://github.com/dandavison/delta#get-started
-      core.pager = "delta";
-      interactive.diffFilter = "delta --color-only";
-      delta.navigate = true;
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
 
@@ -46,6 +46,9 @@
 
       # see https://michaelheap.com/git-ignore-rev/
       blame.ignoreRevsFile = ".git-blame-ignore-revs";
+
+      # see https://adamj.eu/tech/2022/10/15/how-to-rebase-stacked-git-branches/
+      rebase.updateRefs = true;
     };
   };
 }
