@@ -98,9 +98,11 @@
       m = "make";
       t = "task";
       k = "kubectl --context build";
-      kp = "kubectl --context prod-eu2";
-      kp2 = "kubectl --context prod-eu2"; # deprecated
-      k9sp = "k9s --context prod-eu2";
+      kb9 = "k9s --context build";
+      kp = "kubectl --context prod-eu5";
+      kp9 = "k9s --context prod-eu5";
+      ks = "kubectl --context prod-eu6";
+      ks9 = "k9s --context prod-eu6";
       g = "git";
       gui = "gitui";
       htop = "btop";

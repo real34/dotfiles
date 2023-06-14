@@ -131,6 +131,7 @@
     kubernetes-helm
     stern
     k9s
+    krew
 
     php
     php81Packages.composer
