@@ -89,9 +89,10 @@
     offpunk
     lagrange
     thunderbird
-    ferdium
+    protonmail-bridge
     slack
     signal-desktop
+    tdesktop
     zoom-us
     libreoffice
     freemind
@@ -106,6 +107,7 @@
     gcalcli
 
     spotify
+    spotdl
     vlc
     audacity
     obs-studio
@@ -132,7 +134,6 @@
 
     php
     php81Packages.composer
-    python
     python3
     mkcert
     goaccess
