@@ -101,8 +101,8 @@
       kp2 = "kubectl --context prod-eu2"; # deprecated
       k9sp = "k9s --context prod-eu2";
       g = "git";
-      tg = "tig --all";
-      tgs = "tig status";
+      gui = "gitui";
+      htop = "btop";
     };
   };
 }

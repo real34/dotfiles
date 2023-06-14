@@ -18,7 +18,7 @@
       ./programs/zsh.nix
     ];
 
-  programs.htop.enable = true;
+  programs.btop.enable = true;
   programs.vim.enable = true;
   programs.vscode = {
     enable = true;

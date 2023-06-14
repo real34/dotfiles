@@ -51,6 +51,7 @@
     file
     bc
     ts
+    tz
     mcfly
     fzf
     bat
