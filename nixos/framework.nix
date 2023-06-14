@@ -18,7 +18,7 @@
   ];
 
   # Use latest kernel version because on 5.15 screen is not detected properly (and external monitor doesn't work either)
-  boot.kernelPackages = pkgs.linuxPackages_6_0; # see https://github.com/NixOS/nixpkgs/issues/183955#issuecomment-1210468614
+  boot.kernelPackages = pkgs.linuxPackages_6_1; # see https://github.com/NixOS/nixpkgs/issues/183955#issuecomment-1210468614
 
   # prevent "/boot/efi No space left on device" errors - see https://github.com/NixOS/nixpkgs/issues/23926
   boot.loader.grub.configurationLimit = 10;
@@ -57,8 +57,12 @@
   ];
   ## Make it nice (https://nixos.wiki/wiki/Xorg && https://wiki.archlinux.org/title/Framework_Laptop#HiDPI_settings)
   # https://github.com/kvark/dotfiles/blob/master/nix/hardware-configuration.nix#L41
-  hardware.video.hidpi.enable = lib.mkDefault true;
+
+  # - The option definition `hardware.video.hidpi.enable' in `/etc/nixos/framework.nix' no longer has any effect; please remove it.
+  # Consider manually configuring fonts.fontconfig according to personal preference.
+  # hardware.video.hidpi.enable = lib.mkDefault true;
   services.xserver.dpi = 130;
+
   environment.variables = {
     GDK_SCALE = "1.5";
     GDK_DPI_SCALE = "0.77"; # 1/1.3
