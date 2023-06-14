@@ -115,7 +115,7 @@
 
     jetbrains-mono
     vscode.fhs
-    zettlr
+    logseq
 
     unclutter-xfixes
     playerctl
