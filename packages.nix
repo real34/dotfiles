@@ -96,7 +96,7 @@
     libreoffice
     freemind
     filezilla
-    vokoscreen
+    vokoscreen-ng
     asciinema
     ffmpeg
     flameshot
