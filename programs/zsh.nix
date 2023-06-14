@@ -52,6 +52,10 @@
         curl -v -s -H "Pragma: akamai-x-cache-on, akamai-x-cache-remote-on, akamai-x-check-cacheable, akamai-x-get-cache-key, akamai-x-get-extracted-values, akamai-x-get-nonces, akamai-x-get-ssl-client-session-id, akamai-x-get-true-cache-key, akamai-x-ser"  "$1" 2>&1 > /dev/null
       }
 
+      lh() {
+        CHROME_PATH=$(which google-chrome-beta) pnpm dlx lighthouse $1 --view
+      }
+
       unalias v
 
       # see https://github.com/cantino/mcfly
