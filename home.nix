@@ -4,7 +4,7 @@
   home.stateVersion = "22.05";
 
   # Temporary overlays for patches
-  nixpkgs.overlays = [];
+  nixpkgs.overlays = [ ];
 
   home.file.".config/traefik/traefik.toml".source = ./files/traefik.toml;
   home.file.".npmrc".source = ./files/.npmrc;
