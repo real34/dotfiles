@@ -81,7 +81,6 @@
         startup = [
           { command = "nextcloud"; notification = false; }
           { command = "setxkbmap -layout fr -variant bepo"; notification = false; }
-          { command = "udiskie"; notification = false; }
           { command = "copyq"; notification = false; }
           { command = "numlockx on"; notification = false; } # turn verr num on
 

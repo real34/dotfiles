@@ -112,6 +112,7 @@
   services.gnome.at-spi2-core.enable = true; # see https://github.com/NixOS/nixpkgs/pull/49636/files
   services.gnome.gnome-keyring.enable = true; # see https://nixos.wiki/wiki/Visual_Studio_Code#Error_after_Sign_On
   services.blueman.enable = true;
+  services.udisks2.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
