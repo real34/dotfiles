@@ -92,6 +92,9 @@
     # Sound
     blueman
     bluez-tools
+
+    # VPN - see https://www.wireguard.com/install/
+    wireguard-tools
   ];
   virtualisation.docker.enable = true;
 
