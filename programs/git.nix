@@ -49,7 +49,9 @@
       push.autoSetupRemote = true;
 
       # see https://michaelheap.com/git-ignore-rev/
-      blame.ignoreRevsFile = ".git-blame-ignore-revs";
+      # Not activated globally because it throws errors if the file is not present.
+      # Enable it in a specific repository if needed.
+      # blame.ignoreRevsFile = ".git-blame-ignore-revs";
 
       # see https://adamj.eu/tech/2022/10/15/how-to-rebase-stacked-git-branches/
       rebase.updateRefs = true;
