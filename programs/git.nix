@@ -37,6 +37,7 @@
       diff.colorMoved = "default";
 
       merge.tool = "meld";
+      diff.external = "difft";
       diff.algorithm = "patience";
       pull.ff = "only";
       credential.helper = "store";

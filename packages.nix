@@ -81,6 +81,7 @@
     meld
     glab
     sapling
+    difftastic
 
     firefox
     vivaldi
