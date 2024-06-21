@@ -59,6 +59,9 @@
     fzf
     bat
     bat-extras.prettybat
+    xsel
+    trippy
+    monolith # save a web page as a single file
 
     atool
     unzip
@@ -145,10 +148,12 @@
 
     checkbashisms
     shellcheck
+    toilet
 
     # Perso
     nextcloud-client
     rclone
+    ventoy-full
     #    calibre
     gparted
     ticktick
