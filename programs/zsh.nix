@@ -43,10 +43,6 @@
         echo "… tchak !"
       }
 
-      dcrefresh() {
-      	dc stop -t0 $1 && dc rm -vf $1 && dc up -d $1
-      }
-
       akamai() {
         # see https://gist.github.com/saml/4758360
         curl -v -s -H "Pragma: akamai-x-cache-on, akamai-x-cache-remote-on, akamai-x-check-cacheable, akamai-x-get-cache-key, akamai-x-get-extracted-values, akamai-x-get-nonces, akamai-x-get-ssl-client-session-id, akamai-x-get-true-cache-key, akamai-x-ser"  "$1" 2>&1 > /dev/null
@@ -91,9 +87,9 @@
       j = "fasd_cd -d"; # cd, same functionality as j in autojump
       zz = "fasd_cd -d -i"; # cd with interactive selection
 
-      dc = "docker-compose";
-      dcr = "docker-compose run --rm";
-      dcrm = "docker-compose rm -fsv";
+      dc = "docker compose";
+      dcr = "docker compose run --rm";
+      dcrm = "docker compose rm -fsv";
       copy = "xclip -selection c";
 
       bepo = "setxkbmap -layout fr -variant bepo";
@@ -103,10 +99,8 @@
       t = "task";
       k = "kubectl --context build";
       kb9 = "k9s --context build";
-      kp = "kubectl --context prod-eu5";
-      kp9 = "k9s --context prod-eu5";
-      ks = "kubectl --context prod-eu6";
-      ks9 = "k9s --context prod-eu6";
+      kp = "kubectl --context prod-eu7";
+      kp9 = "k9s --context prod-eu7";
       g = "git";
       gui = "gitui";
       htop = "btop";
