@@ -121,7 +121,8 @@
     numlockx
 
     nixpkgs-fmt
-    nodejs-18_x
+    nodejs_20
+    bun
     cypress
     docker
     docker-compose
