@@ -150,6 +150,9 @@
     shellcheck
     toilet
 
+    # AI
+    ollama
+
     # Perso
     nextcloud-client
     rclone
