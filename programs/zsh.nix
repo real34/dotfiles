@@ -1,5 +1,11 @@
 {
-  # TODO replace with  Starship: https://starship.rs/fr-fr/installing/#declaration-utilisateur-unique-via-home-manager
+  # see https://starship.rs/fr-fr/installing/#declaration-utilisateur-unique-via-home-manager
+  programs.starship =
+    {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
   programs.zsh = {
     enable = true;
     autosuggestion = {
