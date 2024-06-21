@@ -11,7 +11,7 @@
     "code"
 
     "vivaldi"
-    "google-chrome-beta"
+    "google-chrome"
     "slack"
     "spotify"
     "spotify-unwrapped"
@@ -85,7 +85,7 @@
 
     firefox
     vivaldi
-    google-chrome-beta
+    google-chrome
     epiphany
     offpunk
     lagrange

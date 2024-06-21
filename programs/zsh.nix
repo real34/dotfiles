@@ -57,7 +57,7 @@
       }
 
       lh() {
-        CHROME_PATH=$(which google-chrome-beta) pnpm dlx lighthouse $1 --view
+        CHROME_PATH=$(which google-chrome) pnpm dlx lighthouse $1 --view
       }
 
       unalias v
