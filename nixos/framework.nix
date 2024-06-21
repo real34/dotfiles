@@ -85,7 +85,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Backlight (see https://wiki.archlinux.org/title/Backlight#xbacklight_returns_:_No_outputs_have_backlight_property)
   hardware.acpilight.enable = true;

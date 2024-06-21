@@ -48,7 +48,7 @@
     };
 
   services.unclutter.enable = true;
-  services.gpg-agent.enable = true;
   services.blueman-applet.enable = true;
+
   services.udiskie.enable = true; # require "services.udisks2.enable = true" in system configuration
 }

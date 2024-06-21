@@ -20,6 +20,7 @@
 
   boot.tmp.cleanOnBoot = true;
 
+  # Networking
   networking.hostName = "pierre"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -53,17 +54,19 @@
   # Configure keymap in X11
   services.xserver = {
     enable = true;
-    layout = "fr";
-    xkbVariant = "bepo";
-
-    displayManager = {
-      defaultSession = "none+i3";
+    xkb = {
+      layout = "fr";
+      variant = "bepo";
     };
+
     windowManager = {
       i3 = {
         enable = true;
       };
     };
+  };
+  services.displayManager = {
+    defaultSession = "none+i3";
   };
 
   # Configure console keymap
@@ -116,6 +119,7 @@
   services.gnome.gnome-keyring.enable = true; # see https://nixos.wiki/wiki/Visual_Studio_Code#Error_after_Sign_On
   services.blueman.enable = true;
   services.udisks2.enable = true;
+  services.resolved.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
