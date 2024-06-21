@@ -16,6 +16,8 @@
     "spotify"
     "spotify-unwrapped"
     "zoom"
+
+    "ticktick"
   ];
 
   home.packages = with pkgs; [
@@ -144,5 +146,6 @@
     rclone
     #    calibre
     gparted
+    ticktick
   ];
 }
