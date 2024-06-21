@@ -69,6 +69,8 @@
       eval "$(op completion zsh)"; compdef _op op
       eval "$(logcli --completion-script-zsh)"
 
+      # https://docs.github.com/en/copilot/github-copilot-in-the-cli/using-github-copilot-in-the-cli?s=03#setting-up-aliases-for-copilot-in-the-cli
+      eval "$(gh copilot alias -- zsh)"
 
       # K8s
       source <(helm completion zsh)

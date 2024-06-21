@@ -80,6 +80,7 @@
     tldr
 
     git-filter-repo
+    gh
     meld
     difftastic
 
