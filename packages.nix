@@ -139,6 +139,7 @@
     python3
     mkcert
     goaccess
+    grafana-loki # logcli
 
     checkbashisms
     shellcheck

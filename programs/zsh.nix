@@ -67,6 +67,7 @@
       eval "$(mcfly init zsh)"
 
       eval "$(op completion zsh)"; compdef _op op
+      eval "$(logcli --completion-script-zsh)"
 
       eval "$(glab completion -s zsh)"
 
