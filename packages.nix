@@ -135,6 +135,8 @@
     php
     php81Packages.composer
     python3
+    pipx # for global python packages (aider-chat, fabric, etc.)
+    conda
     mkcert
     goaccess
     grafana-loki # logcli

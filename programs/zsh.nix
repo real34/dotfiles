@@ -83,7 +83,7 @@
       EDITOR = "vim";
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=7";
       TERMINAL = "sakura";
-      PATH = "$PATH:$HOME/.npm/bin";
+      PATH = "$PATH:$HOME/.npm/bin:$HOME/.local/bin";
     };
 
     shellAliases = {
