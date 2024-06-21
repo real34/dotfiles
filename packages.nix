@@ -79,8 +79,6 @@
 
     git-filter-repo
     meld
-    glab
-    sapling
     difftastic
 
     firefox
@@ -90,7 +88,6 @@
     offpunk
     lagrange
     thunderbird
-    protonmail-bridge
     slack
     signal-desktop
     tdesktop
@@ -99,7 +96,6 @@
     freemind
     filezilla
     vokoscreen-ng
-    asciinema
     ffmpeg
     flameshot
     gimp
@@ -116,7 +112,6 @@
 
     jetbrains-mono
     vscode.fhs
-    logseq
 
     unclutter-xfixes
     playerctl

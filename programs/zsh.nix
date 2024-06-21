@@ -69,7 +69,6 @@
       eval "$(op completion zsh)"; compdef _op op
       eval "$(logcli --completion-script-zsh)"
 
-      eval "$(glab completion -s zsh)"
 
       # K8s
       source <(helm completion zsh)
