@@ -38,6 +38,7 @@
     pulseaudioFull
     pavucontrol
     bluez # was bluezFull before 27th september 2022
+    solaar # bluetooth unifying devices and receiver
 
     sakura
     fasd
