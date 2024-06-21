@@ -39,6 +39,14 @@
     };
   };
 
+  # https://github.com/nix-community/nix-direnv/
+  programs.direnv =
+    {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
+
   services.unclutter.enable = true;
   services.gpg-agent.enable = true;
   services.blueman-applet.enable = true;

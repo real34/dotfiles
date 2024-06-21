@@ -25,6 +25,9 @@
       ".watsonrc"
       ".idea"
       ".vscode"
+      "shell.nix"
+      ".envrc"
+      ".direnv"
     ];
 
     # see https://github.com/dandavison/delta#get-started

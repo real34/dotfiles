@@ -122,6 +122,11 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+  # https://github.com/nix-community/nix-direnv/
+  nix.extraOptions = ''
+    keep-outputs = true
+    keep-derivations = true
+  '';
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
