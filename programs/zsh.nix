@@ -84,6 +84,10 @@
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=7";
       TERMINAL = "sakura";
       PATH = "$PATH:$HOME/.npm/bin:$HOME/.local/bin";
+      # Use a local Cypress binary instead of the one installed by the CLI (not usable on NixOS)
+      # see https://github.com/NixOS/nixpkgs/pull/56387 and https://discourse.nixos.org/t/cypress-with-npm/15137/4
+      CYPRESS_INSTALL_BINARY = 0;
+      CYPRESS_RUN_BINARY = "$HOME/.nix-profile/bin/Cypress";
     };
 
     shellAliases = {
