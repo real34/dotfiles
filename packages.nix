@@ -138,7 +138,7 @@
     krew
 
     php
-    php81Packages.composer
+    php83Packages.composer
     python3
     pipx # for global python packages (aider-chat, fabric, etc.)
     conda
