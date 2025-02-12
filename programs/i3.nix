@@ -88,7 +88,7 @@
           { command = "feh --bg-scale /home/pierre/Documents/Graphisme/fc-bg-light-black.png"; notification = false; }
 
           # docker run -d --net traefik --ip 172.10.0.10 --restart always -v /var/run/docker.sock:/var/run/docker.sock:ro --name traefik -p 80:80 -p 8080:8080 traefik:2.4.9 --api.insecure=true --providers.docker
-          { command = "docker start traefik"; notification = false; }
+          # { command = "docker start traefik"; notification = false; }
         ];
       };
     };
