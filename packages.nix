@@ -68,9 +68,7 @@
     zip
 
     pass
-    lastpass-cli
-    bitwarden-cli
-    _1password
+    _1password-cli
     _1password-gui
     yubico-pam
     yubikey-manager
