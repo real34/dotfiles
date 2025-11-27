@@ -5,13 +5,12 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./framework.nix
-      <home-manager/nixos>
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./framework.nix
+    <home-manager/nixos>
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -30,25 +29,24 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  networking.extraHosts = "
-";
+  networking.extraHosts = "";
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.utf8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "fr_FR.utf8";
-    LC_IDENTIFICATION = "fr_FR.utf8";
-    LC_MEASUREMENT = "fr_FR.utf8";
-    LC_MONETARY = "fr_FR.utf8";
-    LC_NAME = "fr_FR.utf8";
-    LC_NUMERIC = "fr_FR.utf8";
-    LC_PAPER = "fr_FR.utf8";
-    LC_TELEPHONE = "fr_FR.utf8";
-    LC_TIME = "fr_FR.utf8";
+    LC_ADDRESS = "fr_FR.UTF-8";
+    LC_IDENTIFICATION = "fr_FR.UTF-8";
+    LC_MEASUREMENT = "fr_FR.UTF-8";
+    LC_MONETARY = "fr_FR.UTF-8";
+    LC_NAME = "fr_FR.UTF-8";
+    LC_NUMERIC = "fr_FR.UTF-8";
+    LC_PAPER = "fr_FR.UTF-8";
+    LC_TELEPHONE = "fr_FR.UTF-8";
+    LC_TIME = "fr_FR.UTF-8";
   };
 
   # Configure keymap in X11
@@ -59,15 +57,9 @@
       variant = "bepo";
     };
 
-    windowManager = {
-      i3 = {
-        enable = true;
-      };
-    };
+    windowManager = { i3 = { enable = true; }; };
   };
-  services.displayManager = {
-    defaultSession = "none+i3";
-  };
+  services.displayManager = { defaultSession = "none+i3"; };
 
   # Configure console keymap
   console.keyMap = "fr";
@@ -89,7 +81,7 @@
 
     # Basics
     docker
-    gitAndTools.gitFull
+    gitFull
     vim
 
     # Sound
@@ -108,25 +100,36 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-  programs.zsh.enable = true; # see https://github.com/NixOS/nixpkgs/issues/20548#issuecomment-261965667
+  programs.zsh.enable =
+    true; # see https://github.com/NixOS/nixpkgs/issues/20548#issuecomment-261965667
   programs.light.enable = true;
+
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [ fnm stdenv.cc.cc.lib ];
+  };
 
   # List services that you want to enable:
   services.nscd.enable = true;
   services.tlp.enable = true;
   services.upower.enable = true; # keyboard backlight
-  services.gnome.at-spi2-core.enable = true; # see https://github.com/NixOS/nixpkgs/pull/49636/files
-  services.gnome.gnome-keyring.enable = true; # see https://nixos.wiki/wiki/Visual_Studio_Code#Error_after_Sign_On
+  services.gnome.at-spi2-core.enable =
+    true; # see https://github.com/NixOS/nixpkgs/pull/49636/files
+  services.gnome.gnome-keyring.enable =
+    true; # see https://nixos.wiki/wiki/Visual_Studio_Code#Error_after_Sign_On
   services.blueman.enable = true;
   services.udisks2.enable = true;
   services.resolved.enable = true;
+  services.gvfs.enable =
+    true; # to view MTP devices in file manager - https://www.perplexity.ai/search/how-to-browse-files-from-bus-0-QWBoYG1gRLu3uMRqFSzw9A
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Ports: 9003 - Xdebug
+  networking.firewall.allowedTCPPorts = [ 9003 ];
+  networking.firewall.allowedUDPPorts = [ 9003 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
   # https://github.com/nix-community/nix-direnv/
@@ -134,6 +137,7 @@
     keep-outputs = true
     keep-derivations = true
   '';
+  nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

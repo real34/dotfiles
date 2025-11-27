@@ -4,17 +4,7 @@
   programs.gitui.enable = true;
   programs.git = {
     enable = true;
-    package = pkgs.gitAndTools.gitFull;
-
-    # TODO: https://www.imagile.fr/utiliser-automatiquement-plusieurs-identites-sur-git/
-    userEmail = "pierre@front-commerce.com";
-    userName = "Pierre Martin";
-
-    aliases = {
-      co = "checkout";
-      pushf = "push --force-with-lease --force-if-includes";
-      aimr = "log --pretty=format:'%s%n%b---'";
-    };
+    package = pkgs.gitFull;
 
     ignores = [
       ".DS_Store"
@@ -28,11 +18,29 @@
       "shell.nix"
       ".envrc"
       ".direnv"
+      ".ddev"
+      ".claude"
+      "CLAUDE.local.md"
     ];
 
     # see https://github.com/dandavison/delta#get-started
-    delta.enable = true;
-    extraConfig = {
+    #delta.enable = true;
+    # TEMPORARY DEACTIVATED due to the error
+    # error[E0282]: type annotations needed for `Box<_>`
+    #  --> /build/delta-0.17.0-vendor.tar.gz/time/src/format_description/parse/mod.rs:83:9
+
+    settings = {
+      alias = {
+        co = "checkout";
+        pushf = "push --force-with-lease --force-if-includes";
+        aimr = "log --pretty=format:'%s%n%b---'";
+      };
+
+      user = {
+        email = "pierre@front-commerce.com";
+        name = "Pierre Martin";
+      };
+
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
 

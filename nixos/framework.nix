@@ -1,4 +1,3 @@
-#
 # NixOS Configuration for Framework Laptop
 # Source: https://gist.github.com/digitalknk/ee0379c1cd4597463c31a323ea5882a5
 # Alt: https://github.com/NixOS/nixos-hardware/blob/master/framework/default.nix
@@ -17,8 +16,7 @@
     "layout=bls" # Read $KERNEL_INSTALL_LAYOUT from /etc/machine-info. Please move it to the layout= setting of /etc/kernel/install.conf.
   ];
 
-  # Use latest kernel version because on 5.15 screen is not detected properly (and external monitor doesn't work either)
-  boot.kernelPackages = pkgs.linuxPackages_6_1; # see https://github.com/NixOS/nixpkgs/issues/183955#issuecomment-1210468614
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # prevent "/boot/efi No space left on device" errors - see https://github.com/NixOS/nixpkgs/issues/23926
   boot.loader.grub.configurationLimit = 10;
@@ -47,12 +45,11 @@
 
   # Display things like a boss
   ## Make it work
-  hardware.opengl.enable = true;
-  hardware.opengl.extraPackages = with pkgs; [
-    mesa.drivers # was mesa_drivers before 27th september 2022
-    vaapiIntel
-    vaapiVdpau
-    libvdpau-va-gl
+  hardware.graphics.enable = true;
+  hardware.graphics.extraPackages = with pkgs; [
+    mesa
+    intel-vaapi-driver # used to be vaapiIntel
+    libva-vdpau-driver # used to be vaapiVdpau
     intel-media-driver
   ];
   ## Make it nice (https://nixos.wiki/wiki/Xorg && https://wiki.archlinux.org/title/Framework_Laptop#HiDPI_settings)
@@ -64,9 +61,9 @@
   services.xserver.dpi = 130;
 
   environment.variables = {
-    GDK_SCALE = "1.5";
+    GDK_SCALE = "1.3";
     GDK_DPI_SCALE = "0.77"; # 1/1.3
-    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1.5";
+    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1.3";
   };
 
   # Bring in some audio

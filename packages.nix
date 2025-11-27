@@ -1,30 +1,32 @@
 { pkgs, lib, ... }:
 
-{
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "1password"
-    "1password-cli"
+let
+  atomicptr = import (fetchTarball
+    "https://github.com/atomicptr/nix/archive/refs/heads/master.tar.gz") { };
+in {
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "1password"
+      "1password-cli"
 
-    "ngrok"
-    "postman"
-    "vscode"
-    "code"
+      "ngrok"
+      "postman"
+      "vscode"
+      "code"
 
-    "vivaldi"
-    "google-chrome"
-    "slack"
-    "spotify"
-    "spotify-unwrapped"
-    "zoom"
+      "google-chrome"
+      "slack"
+      "spotify"
+      "spotify-unwrapped"
 
-    "ticktick"
-  ];
+      "ticktick"
+    ];
 
   home.packages = with pkgs; [
     wget
     curl
     httpie
-    hurl
+    hurl # TODO 2025-08-28 Compilation error: error: function pointer comparisons do not produce meaningful results since their addresses are not guaranteed to be unique
     bind
     gcc
     openssl.dev
@@ -34,11 +36,14 @@
     hey
     ngrok
     openssl
+    atomicptr.crab
 
     pulseaudioFull
     pavucontrol
     bluez # was bluezFull before 27th september 2022
-    solaar # bluetooth unifying devices and receiver
+
+    # see https://discourse.nixos.org/t/error-nose-1-3-7-not-supported-for-interpreter-python3-12/48703
+    # solaar # bluetooth unifying devices and receiver
 
     sakura
     fasd
@@ -62,12 +67,12 @@
     xsel
     trippy
     monolith # save a web page as a single file
+    killport
 
     atool
     unzip
     zip
 
-    pass
     _1password-cli
     _1password-gui
     yubico-pam
@@ -85,35 +90,32 @@
     gh
     meld
     difftastic
+    glab
 
     firefox
-    vivaldi
     google-chrome
-    epiphany
     offpunk
     lagrange
     thunderbird
     slack
+    mattermost-desktop
     signal-desktop
-    tdesktop
-    zoom-us
     libreoffice
     freemind
     filezilla
     vokoscreen-ng
     ffmpeg
-    flameshot
+    ksnip
     gimp
     copyq
     wireshark
     gcalcli
+    zed-editor
+    kdePackages.kcachegrind
 
     spotify
-    spotdl
+    # spotdl see https://discourse.nixos.org/t/error-nose-1-3-7-not-supported-for-interpreter-python3-12/48703
     vlc
-    audacity
-    obs-studio
-    shotcut
 
     jetbrains-mono
     vscode.fhs
@@ -122,13 +124,14 @@
     playerctl
     numlockx
 
-    nixpkgs-fmt
-    nodejs_20
+    nixfmt-classic
+    nodejs_22
+    fnm
     bun
     cypress
     docker
     docker-compose
-    kube3d
+    k3d
     kubectl
     kubernetes-helm
     stern
@@ -136,16 +139,23 @@
     krew
 
     php
-    php83Packages.composer
-    python3
-    pipx # for global python packages (aider-chat, fabric, etc.)
-    conda
+    php84Packages.composer
+    mariadb
+    adminer
+    python312
+    python312Packages.pip
+    python312Packages.uv
+    # pipx # for global python packages (aider-chat, fabric, etc.)
+    twine
+    # uv
+    # conda
     mkcert
     goaccess
     grafana-loki # logcli
 
     checkbashisms
     shellcheck
+    shfmt
     toilet
 
     # AI
@@ -158,9 +168,18 @@
     # Perso
     nextcloud-client
     rclone
-    ventoy-full
-    #    calibre
+    # calibre
     gparted
     ticktick
+    agate
+    beancount
+
+    ## TODO: fix fava
+    # Checking runtime dependencies for fava-1.29-py3-none-any.whl
+    # copying path '/nix/store/yxd2da4vc9gi5jbs1nlvwpsmwj308bp1-kdoctools-6.10.0' from 'https://cache.nixos.org'...
+    #   - beancount<3,>=2.3.5 not satisfied by version 3.0.0
+    # copying path '/nix/store/a8n27li3n2fy8jfdm99v9j3yn6w3yk5y-kguiaddons-6.10.0' from 'https://cache.nixos.org'...
+    # error: builder for '/nix/store/2xd25ssas4yliykz4y4n8p6h762wcalm-fava-1.29.drv' failed with exit code 1
+    # fava
   ];
 }

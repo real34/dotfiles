@@ -8,26 +8,26 @@
 
   home.file.".config/traefik/traefik.toml".source = ./files/traefik.toml;
   home.file.".npmrc".source = ./files/.npmrc;
+  home.file.".aider.conf.yml".source = ./files/.aider.conf.yml;
   home.file.".local/bin/stt-dictate" = {
     source = ./files/stt-dictate.sh;
     executable = true;
   };
 
-  imports =
-    [
-      ./packages.nix
+  imports = [
+    ./packages.nix
 
-      ./programs/git.nix
-      ./programs/i3.nix
-      ./programs/zsh.nix
-    ];
+    ./programs/git.nix
+    ./programs/i3.nix
+    ./programs/zsh.nix
+  ];
 
   programs.btop.enable = true;
   programs.vim.enable = true;
   programs.vscode = {
     enable = true;
     package = pkgs.vscode.fhs;
-    extensions = [ ];
+    profiles = { default = { extensions = [ ]; }; };
   };
   programs.rofi = {
     enable = true;
@@ -37,23 +37,35 @@
   programs.autorandr = {
     enable = true;
     hooks = {
-      postswitch = {
-        "notify-i3" = "${pkgs.i3}/bin/i3-msg restart";
-      };
+      postswitch = { "notify-i3" = "${pkgs.i3}/bin/i3-msg restart"; };
     };
   };
 
   # https://github.com/nix-community/nix-direnv/
-  programs.direnv =
-    {
-      enable = true;
-      enableZshIntegration = true;
-      nix-direnv.enable = true;
-    };
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [ obs-backgroundremoval ];
+  };
 
   services.unclutter.enable = true;
   services.blueman-applet.enable = true;
-  services.dunst.enable = true;  # notification daemon
+  services.dunst.enable = true; # notification daemon
 
-  services.udiskie.enable = true; # require "services.udisks2.enable = true" in system configuration
+  services.udiskie.enable =
+    true; # require "services.udisks2.enable = true" in system configuration
+
+  # Workaround for Failed to restart syncthingtray.service: Unit tray.target not found.
+  # - https://github.com/nix-community/home-manager/issues/2064
+  systemd.user.targets.tray = {
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
+    };
+  };
 }

@@ -1,0 +1,9 @@
+     time_namelookup:  %{time_namelookup}s\n
+        time_connect:  %{time_connect}s\n
+     time_appconnect:  %{time_appconnect}s\n
+    time_pretransfer:  %{time_pretransfer}s\n
+       time_redirect:  %{time_redirect}s\n
+  time_starttransfer:  %{time_starttransfer}s\n
+                     ----------\n
+          time_total:  %{time_total}s\n
+Legend: https://cf-assets.www.cloudflare.com/zkvhlag99gkb/2EfInkqn7sNtWkWFdxPDk4/2f3e1c0202ed6025bbe12f6f540c1b4a/Screen-Shot-2018-10-16-at-14.51.29-1.png

@@ -1,16 +1,15 @@
+{ pkgs, ... }:
+
 {
   # see https://starship.rs/fr-fr/installing/#declaration-utilisateur-unique-via-home-manager
-  programs.starship =
-    {
-      enable = true;
-      enableZshIntegration = true;
-    };
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   programs.zsh = {
     enable = true;
-    autosuggestion = {
-      enable = true;
-    };
+    autosuggestion = { enable = true; };
     enableCompletion = true;
     history = {
       ignoreDups = true;
@@ -37,9 +36,9 @@
 
     # `$` must be escaped with `''` :metal:
     # source: https://nixos.org/nix-dev/2015-December/019018.html
-    initExtra = ''
+    initContent = ''
       bindkey ' ' forward-word
-      zstyle ':completion:*:hosts' hosts ''${=''${''${''${''${(@M)''${(f)"''$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
+      zstyle ':completion:*:hosts' hosts ''${=''${''${''${''${(@M)''${(f)"$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
       setopt PROMPT_CR
       setopt PROMPT_SP
 
@@ -77,6 +76,9 @@
       source <(k3d completion zsh)
       source <(kubectl completion zsh)
       source <(k9s completion zsh); compdef _k9s k9s
+
+      # https://github.com/Schniz/fnm#shell-setup
+      eval "$(fnm env --use-on-cd --shell zsh)"
     '';
 
     sessionVariables = {
@@ -88,6 +90,7 @@
       # see https://github.com/NixOS/nixpkgs/pull/56387 and https://discourse.nixos.org/t/cypress-with-npm/15137/4
       CYPRESS_INSTALL_BINARY = 0;
       CYPRESS_RUN_BINARY = "$HOME/.nix-profile/bin/Cypress";
+      LD_LIBRARY_PATH = "${pkgs.libgcc}/lib";
     };
 
     shellAliases = {
