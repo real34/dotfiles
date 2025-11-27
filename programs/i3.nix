@@ -76,6 +76,9 @@
           # Sreen brightness controls
           "XF86MonBrightnessUp" = "exec light -A 2"; # increase screen brightness
           "XF86MonBrightnessDown" = "exec light -U 2"; # decrease screen brightness
+
+          # Speech-to-text (toggle: press to start/stop)
+          "${modifier}+space" = "exec ~/.local/bin/stt-dictate toggle";
         };
 
         startup = [

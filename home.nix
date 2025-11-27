@@ -8,6 +8,10 @@
 
   home.file.".config/traefik/traefik.toml".source = ./files/traefik.toml;
   home.file.".npmrc".source = ./files/.npmrc;
+  home.file.".local/bin/stt-dictate" = {
+    source = ./files/stt-dictate.sh;
+    executable = true;
+  };
 
   imports =
     [
@@ -49,6 +53,7 @@
 
   services.unclutter.enable = true;
   services.blueman-applet.enable = true;
+  services.dunst.enable = true;  # notification daemon
 
   services.udiskie.enable = true; # require "services.udisks2.enable = true" in system configuration
 }

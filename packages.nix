@@ -150,6 +150,10 @@
 
     # AI
     ollama
+    whisper-cpp # STT local
+    alsa-utils # arecord pour l'enregistrement
+    xdotool # pour taper le texte transcrit
+    libnotify # notifications
 
     # Perso
     nextcloud-client
