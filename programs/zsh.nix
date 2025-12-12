@@ -121,6 +121,7 @@
       g = "git";
       gui = "gitui";
       htop = "btop";
+      c = "claude";
     };
   };
 }
