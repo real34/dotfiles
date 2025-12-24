@@ -13,6 +13,7 @@ in {
       "postman"
       "vscode"
       "code"
+      "antigravity"
 
       "google-chrome"
       "slack"
@@ -119,6 +120,7 @@ in {
 
     jetbrains-mono
     vscode.fhs
+    antigravity-fhs
 
     unclutter-xfixes
     playerctl
@@ -168,6 +170,7 @@ in {
     # Perso
     nextcloud-client
     rclone
+    freeplane
     # calibre
     gparted
     ticktick

@@ -94,7 +94,6 @@
     };
 
     shellAliases = {
-      a = "fasd -a"; # any
       s = "fasd -si"; # show / search / select
       d = "fasd -d"; # directory
       f = "fasd -f"; # file
@@ -122,6 +121,7 @@
       gui = "gitui";
       htop = "btop";
       c = "claude";
+      a = "antigravity";
     };
   };
 }
