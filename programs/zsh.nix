@@ -68,9 +68,6 @@
       eval "$(op completion zsh)"; compdef _op op
       eval "$(logcli --completion-script-zsh)"
 
-      # https://docs.github.com/en/copilot/github-copilot-in-the-cli/using-github-copilot-in-the-cli?s=03#setting-up-aliases-for-copilot-in-the-cli
-      eval "$(gh copilot alias -- zsh)"
-
       # K8s
       source <(helm completion zsh)
       source <(k3d completion zsh)
@@ -79,6 +76,11 @@
 
       # https://github.com/Schniz/fnm#shell-setup
       eval "$(fnm env --use-on-cd --shell zsh)"
+
+      unalias a
+      a() {
+        antigravity $@ --disable-gpu-driver-bug-workarounds --ignore-gpu-blacklist --enable-gpu-rasterization
+      }
     '';
 
     sessionVariables = {
@@ -88,6 +90,7 @@
       PATH = "$PATH:$HOME/.npm/bin:$HOME/.local/bin";
       # Use a local Cypress binary instead of the one installed by the CLI (not usable on NixOS)
       # see https://github.com/NixOS/nixpkgs/pull/56387 and https://discourse.nixos.org/t/cypress-with-npm/15137/4
+      HUSKY = 0;
       CYPRESS_INSTALL_BINARY = 0;
       CYPRESS_RUN_BINARY = "$HOME/.nix-profile/bin/Cypress";
       LD_LIBRARY_PATH = "${pkgs.libgcc}/lib";
@@ -121,7 +124,7 @@
       gui = "gitui";
       htop = "btop";
       c = "claude";
-      a = "antigravity";
+      p = "CLAUDE_CONFIG_DIR=~/.claude-perso claude";
     };
   };
 }

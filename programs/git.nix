@@ -19,7 +19,7 @@
       ".envrc"
       ".direnv"
       ".ddev"
-      ".claude"
+      ".claude/"
       "CLAUDE.local.md"
     ];
 
