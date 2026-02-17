@@ -1,3 +1,3 @@
 # dotfiles
 
-My dotfiles for NixOs, using home-manager.
+This repository has moved to https://git.sans.pub/pierre/dotfiles

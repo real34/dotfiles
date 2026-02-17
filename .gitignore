@@ -1,7 +1,0 @@
-# Secrets
-files/.aider.conf.yml
-*.conf
-
-# Nix
-.direnv/
-result
