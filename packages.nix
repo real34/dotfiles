@@ -80,6 +80,7 @@ in {
     yubikey-manager
     pam_u2f
     polkit_gnome # fun fact: https://gitlab.gnome.org/GNOME/gdm/-/issues/613
+    sshpass
 
     arandr
     feh
@@ -152,6 +153,7 @@ in {
     # uv
     # conda
     mkcert
+    nssTools # certutil for mkcert CA installation in browsers
     goaccess
     grafana-loki # logcli
 
@@ -168,10 +170,12 @@ in {
     libnotify # notifications
 
     # Perso
+    brave
     nextcloud-client
     rclone
+    audacity
     freeplane
-    # calibre
+    calibre
     gparted
     ticktick
     agate

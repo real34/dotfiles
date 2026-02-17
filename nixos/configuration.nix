@@ -29,7 +29,9 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  networking.extraHosts = "";
+  networking.extraHosts = ''
+    127.0.0.1 fc.dev
+    109.238.11.111 nuage-v1.une-frouzins.fr'';
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -68,7 +70,8 @@
   users.users.pierre = {
     isNormalUser = true;
     description = "Pierre";
-    extraGroups = [ "networkmanager" "wheel" "audio" "docker" "video" ];
+    extraGroups =
+      [ "networkmanager" "wheel" "audio" "docker" "video" "lpadmin" ];
     shell = pkgs.zsh;
     packages = with pkgs; [ ];
   };
@@ -109,6 +112,10 @@
     libraries = with pkgs; [ fnm stdenv.cc.cc.lib ];
   };
 
+  # Printing (Epson Stylus SX230 - St Drézéry)
+  services.printing.enable = true;
+  services.printing.drivers = with pkgs; [ epson-escpr ];
+
   # List services that you want to enable:
   services.nscd.enable = true;
   services.tlp.enable = true;
@@ -122,6 +129,29 @@
   services.resolved.enable = true;
   services.gvfs.enable =
     true; # to view MTP devices in file manager - https://www.perplexity.ai/search/how-to-browse-files-from-bus-0-QWBoYG1gRLu3uMRqFSzw9A
+
+  # Prevent coredump issues with Antigravity - https://www.perplexity.ai/search/systemd-coredump-high-cpu-on-n-LUnRQViaRuiDn1LR06hU8w#2
+  systemd.coredump = {
+    enable = true;
+    extraConfig = ''
+      Storage=none
+      ProcessSizeMax=50M
+      MaxUse=100M
+    '';
+  };
+
+  # Caddy
+  # Setup (one time): certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n "mkcert" -i ~/.local/share/mkcert/rootCA.pem
+  # Per domain:
+  #   mkcert -cert-file /tmp/fc.dev.pem -key-file /tmp/fc.dev-key.pem fc.dev
+  #   sudo mkdir -p /etc/caddy/certs && sudo cp /tmp/fc.dev.pem /tmp/fc.dev-key.pem /etc/caddy/certs/ && sudo chown -R caddy:caddy /etc/caddy/certs
+  services.caddy = {
+    enable = true;
+    virtualHosts."fc.dev".extraConfig = ''
+      tls /etc/caddy/certs/fc.dev.pem /etc/caddy/certs/fc.dev-key.pem
+      reverse_proxy http://127.0.0.1:4000
+    '';
+  };
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
